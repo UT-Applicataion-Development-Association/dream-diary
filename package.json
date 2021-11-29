@@ -1,0 +1,29 @@
+{
+  "name": "dream-diary",
+  "version": "1.0.0",
+  "description": "- Node.js\r - MongoDB Compass",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "build-client": "cd dream-diary-client && npm run build && cd ..",
+    "run-client": "cd dream-diary-client && npm start && cd .."
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UT-Applicataion-Development-Association/dream-diary.git"
+  },
+  "author": "UTADA",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UT-Applicataion-Development-Association/dream-diary/issues"
+  },
+  "homepage": "https://github.com/UT-Applicataion-Development-Association/dream-diary#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  }
+}
