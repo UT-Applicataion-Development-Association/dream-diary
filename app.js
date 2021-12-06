@@ -8,19 +8,6 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-
-function helper_service(num){
-    return num * 3
-}
-
-function helper_controller(num) {
-    if (typeof(num) === "number"){
-        helper_service(num)
-    } else {
-        return "No"
-    }
-}
-
 app.get('/route/:num', (req, res) => {
     const num = req.params.num
     const response = helper_controller(num)
