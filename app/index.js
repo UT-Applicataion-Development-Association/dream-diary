@@ -25,6 +25,7 @@ app.use(express.static(paths.staticEntry));
 const { mongoose } = require('./db/mongoose')
 mongoose.set('bufferCommands', false);  // don't buffer db requests if the db server isn't connected - minimizes http requests hanging if this is the case.
 
+// Add APIs
 routes.registerRoutes(app);
 
 app.listen(config.port, () => {

@@ -15,5 +15,11 @@ router.get(
     dreamController.getDreams
 )
 
+router.post(
+    "/dreams",
+    mongoChecker,
+    dreamController.createDream
+)
+
 
 module.exports = router
