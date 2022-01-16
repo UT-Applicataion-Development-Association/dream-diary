@@ -51,5 +51,17 @@ module.exports = {
             console.error(err)
             res.status(500).send(new Response({ msg: err, status: 500 }));
         }
-    }
+    },
+
+    deleteDream: async (req, res) => {
+        // TODO:
+    }, 
+
+    getDream: async (req, res) => {
+        // TODO:
+    }, 
+
+    updateDream: async (req, res) => {
+        // TODO:
+    }, 
 }
