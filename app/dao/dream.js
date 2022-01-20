@@ -18,6 +18,8 @@ module.exports = {
 
     retrieve: async (id) => {
         // TODO: IMPLEMENT THIS
+        const dream = await Dream.find({_id: id})
+        return dream
     },
 
     update: async (id, body) => {
@@ -26,6 +28,8 @@ module.exports = {
 
     delete: async (id) => {
         // TODO: IMPLEMENT THIS
+        const removal_result = await Dream.remove({_id: id})
+        return removal_result
     },
 
     /**

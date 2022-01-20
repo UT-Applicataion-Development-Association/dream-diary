@@ -15,10 +15,25 @@ router.get(
     dreamController.getDreams
 )
 
+// get a specific dream
+router.get(
+    "/dream/:dream_id",
+    // Middlewares
+    mongoChecker,
+    // Controller
+    dreamController.getDream
+)
+
 router.post(
     "/dreams",
     mongoChecker,
     dreamController.createDream
+)
+
+router.delete(
+    "/dream/:dream_id",
+    mongoChecker,
+    dreamController.deleteDream
 )
 
 
