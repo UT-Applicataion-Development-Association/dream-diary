@@ -30,6 +30,8 @@ class DreamServices {
 
     async getDream(id) {
         // TODO: IMPLEMENT THIS
+        const dream =  await dreamDao.retrieve(id)
+        return dream
     }
 
     async updateDream(id, updates) {
@@ -38,6 +40,8 @@ class DreamServices {
 
     async deleteDream(id) {
         // TODO: IMPLEMENT THIS
+        const removal_result = await dreamDao.delete(id)
+        return removal_result
     }
 }
 
