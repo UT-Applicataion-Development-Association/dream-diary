@@ -10,13 +10,11 @@ class DreamServices {
         // Log
         console.log("Get dreams by", params)
 
-        // TODO: IMPLEMENT THIS
-        const dreams = await dreamDao.find() || []
+        const dreams = await dreamDao.find(params) || []
         return dreams
     }
 
     async createDream(title, dreamer, content, tags, image) {
-        // TODO: IMPLEMENT THIS
         const dream = await dreamDao.create({
             title,
             dreamer,
@@ -29,17 +27,16 @@ class DreamServices {
     }
 
     async getDream(id) {
-        // TODO: IMPLEMENT THIS
         const dream =  await dreamDao.retrieve(id)
         return dream
     }
 
     async updateDream(id, updates) {
-        // TODO: IMPLEMENT THIS
+        const updated_dream = await dreamDao.update(id, updates)
+        return updated_dream
     }
 
     async deleteDream(id) {
-        // TODO: IMPLEMENT THIS
         const removal_result = await dreamDao.delete(id)
         return removal_result
     }
