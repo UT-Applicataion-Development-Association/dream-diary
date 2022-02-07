@@ -86,7 +86,7 @@ module.exports = {
     }, 
 
     updateDream: async (req, res) => {
-        // TODO:
+        // FIXME: If a field is not provided, you will overwrite the original content
         const id = req.params.dream_id
         const updates = {
             title: req.body.title || "",
