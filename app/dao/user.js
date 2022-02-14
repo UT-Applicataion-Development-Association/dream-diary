@@ -1,5 +1,5 @@
 const { mongoose } = require('../db/mongoose')
-const { User } = require('../models')
+const { User } = require('../models')  
 
 // TODO : Database level error handle? 
 
@@ -19,19 +19,7 @@ module.exports = {
         return newUser
     },
 
-    retrieve: async (id) => {
-        // TODO: IMPLEMENT THIS
-    },
-
-    update: async (id, body) => {
-        // TODO: IMPLEMENT THIS
-    },
-
-    delete: async (id) => {
-        // TODO: IMPLEMENT THIS
-    },
-
-    find: async (email) => {
+    retrieve: async (email) => {
         // TODO: IMPLEMENT THIS
         try{
             const user = await User.findOne(email)
@@ -40,5 +28,27 @@ module.exports = {
         catch(e){
             throw(e)
         }
-    }
+    },
+
+    update: async (filter,body) => {
+        // TODO: IMPLEMENT THIS
+        try{
+            const user = await User.findOneAndUpdate(filter,body, { new: true })
+            return user
+        }
+        catch(e){
+            throw(e)
+        }
+    },
+
+    delete: async (email) => {
+        // TODO: IMPLEMENT THIS
+        try{
+            User.findOneAndRemove(email)
+        }
+        catch(e){
+            throw(e)
+        }
+        
+    },
 }

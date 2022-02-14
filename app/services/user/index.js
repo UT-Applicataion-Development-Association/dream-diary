@@ -2,11 +2,6 @@ const { userDao } = require('../../dao')
 
 class UserServices {
 
-    async findUser(email) {
-        const user = await userDao.find(email)
-        return user
-    }
-
     async createUser(name, password, email) {
         // TODO: IMPLEMENT THIS
         const user = await userDao.create({
@@ -17,12 +12,16 @@ class UserServices {
         return user
     }
 
-    async getUser(id) {
-        // TODO: IMPLEMENT THIS
+    async getUser(email) {
+        // TODO: also add get by ID version?
+        const user = await userDao.retrieve(email)
+        return user
     }
 
-    async updateUserName(email, updatedName) {
-        // TODO: IMPLEMENT THIS
+    async updateUser(filter, updatedBody) {
+        // TODO: Check if needed to be split into update info and update password
+        const user = await userDao.update(filter,updatedBody)
+        return user
     }
 
     async updateUserPassword(email, updatedPwd) {
@@ -31,6 +30,8 @@ class UserServices {
 
     async deleteUser(email) {
         // TODO: IMPLEMENT THIS
+        await userDao.delete(email)
+        return
     }
 }
 
