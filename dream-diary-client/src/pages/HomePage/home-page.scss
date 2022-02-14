@@ -1,0 +1,18 @@
+@import "../../styles/global_vars";
+
+.home-page {
+    background-color: $light;
+    @include flex-display($jc: flex-start);
+}
+
+.home-nav {
+    @include flex-display;
+    height: 5rem;
+}
+
+.home-main {
+    width: 100vw;
+    min-height: 50vh;
+    background: linear-gradient(to right, #e55d8750, #5fc3e450);
+    @include flex-display($jc: flex-start);
+}

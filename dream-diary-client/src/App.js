@@ -1,9 +1,18 @@
-function App() {
-  return (
-    <div className="App">
+import React from "react";
+import { BrowserRouter } from 'react-router-dom';
+import RenderRoutes from "./routes";
 
-    </div>
-  );
+import "styles/App.scss";
+import "styles/universal.scss";
+
+class App extends React.Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <RenderRoutes />
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
