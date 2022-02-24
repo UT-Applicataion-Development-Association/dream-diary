@@ -25,7 +25,7 @@ router.get(
 )
 
 router.post(
-    "/dreams",
+    "/dream/:user_id",
     mongoChecker,
     dreamController.createDream
 )
@@ -36,5 +36,10 @@ router.delete(
     dreamController.deleteDream
 )
 
+router.patch(
+    "/dream/:dream_id",
+    mongoChecker,
+    dreamController.updateDream
+)
 
 module.exports = router

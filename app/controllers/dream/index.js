@@ -27,6 +27,7 @@ module.exports = {
             // const { title, content, tags, image } = req.body
 
             // Method 2:
+            const dreamer = req.params.user_id
             const body = {
                 title: req.body.title || "",
                 content: req.body.content || "Does not have content",
@@ -43,7 +44,7 @@ module.exports = {
 
             // Create dreams in database
             const dreamServices = new DreamServices()
-            const dream = await dreamServices.createDream(body.title, undefined, body.content, body.tags, body.image)
+            const dream = await dreamServices.createDream(body.title, dreamer, body.content, body.tags, body.image)
 
             // Return response
             res.send(new Response({ entity: { dream } }))
@@ -89,11 +90,20 @@ module.exports = {
         // FIXME: If a field is not provided, you will overwrite the original content
         const id = req.params.dream_id
         const updates = {
-            title: req.body.title || "",
-            content: req.body.content || "Does not have content",
-            tags: req.body.tags || [],
-            image: req.body.image || ""
         }
+        if (req.body.title !== undefined){
+            updates["title"] = req.body.title
+        }
+        if (req.body.content !== undefined){
+            updates["content"] = req.body.content
+        }
+        if (req.body.tags !== undefined){
+            updates["tags"] = req.body.tags
+        }
+        if (req.body.image !== undefined){
+            updates["image"] = req.body.image
+        }
+        console.log(updates)
         try{
             const dreamServices = new DreamServices()
             const updated_dream = await dreamServices.updateDream(id, updates)
