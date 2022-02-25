@@ -1,6 +1,7 @@
 //mongoose model
 const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const Saves = require('./Saves');
 
 const userSchema = mongoose.Schema(
     {
@@ -27,6 +28,10 @@ const userSchema = mongoose.Schema(
             type:Boolean,
             required: true,
             default: false
+        },
+        saves:{  // A user can have multiple saves entities 
+            type: [Saves],
+            default: null
         }
         // profile image?
     },
