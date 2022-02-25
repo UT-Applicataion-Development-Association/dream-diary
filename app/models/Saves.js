@@ -15,7 +15,7 @@ const SaveSchema = new Schema({
         unique: true
     },
     save: {
-        type: [Dream],
+        type: [mongoose.Schema.Types.ObjectId], // Store all Dream ObjectIDs in here.
     }
 }, { timestamps: true});
 

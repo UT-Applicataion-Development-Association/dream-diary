@@ -29,8 +29,8 @@ const userSchema = mongoose.Schema(
             required: true,
             default: false
         },
-        saves:{  // A user can have multiple saves entities 
-            type: [Saves],
+        saves:{  // A user can have multiple saves entities. Store the ObjectIDs of the entity Saves.
+            type: [mongoose.Schema.Types.ObjectId],
             default: null
         }
         // profile image?
