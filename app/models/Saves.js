@@ -1,20 +1,20 @@
 // mongoose model
 const mongoose = require('mongoose');
-const Dream = require('./Dream');
 
 const Schema = mongoose.Schema;
 
 /**
  * Title - name of the collection
  * Save - Lists of dreams
+ * CreatedAt
+ * UpdatedAt
  */
 const SaveSchema = new Schema({
     title: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
-    save: {
+    ofDream: {
         type: [mongoose.Schema.Types.ObjectId], // Store all Dream ObjectIDs in here.
     }
 }, { timestamps: true});
