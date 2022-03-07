@@ -1,0 +1,61 @@
+@import "@fontsource/zcool-qingke-huangyou"; // Defaults to weight 400.
+@import "../../styles/global_vars";
+
+.view-dream-page {
+  background-color: $light;
+  background: linear-gradient(
+    to bottom left,
+    #c7cfff,
+    #ffe7e7,
+    #fff2de,
+    #c7cfff
+  );
+}
+
+.view-nav-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  width: 100vw;
+  height: 6rem;
+  margin-bottom: 0.5rem;
+}
+
+.back-button {
+  height: 2.5rem;
+  margin-left: 2rem;
+}
+
+.dream-title {
+  color: #464660;
+  font-family: "ZCOOL QingKe HuangYou";
+  font-size: 2.5rem;
+  height: 2.5rem;
+  text-shadow: #a8a8b4 0px 2px 3px;
+}
+
+.view-nav-bottom {
+  color: #66697d;
+  font-family: "ZCOOL QingKe HuangYou";
+  font-size: 1.125rem;
+  letter-spacing: 2px;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.view-nav {
+  grid-row: 2;
+}
+
+.dream-description {
+  color: #757ba1;
+  padding: 2rem 2rem;
+}
+
+.dream-image {
+  display: block;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
