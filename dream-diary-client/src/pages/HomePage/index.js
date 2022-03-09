@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Toggle from "../assets/toggle_menu.svg";
 import NewButton from "../assets/new_dream.svg";
 import Dream4 from "../assets/dream4.svg";
+import NavBar from "../../components/NavBar/index";
 
 import "./home-page.scss";
 
@@ -37,7 +37,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="page home-page">
-        <NavBar />
+        <NavBar title={"梦 境 墙"} />
         <main className="home-main">
           {/* <div>
             <Link to="/dream/3">Link to ViewDream</Link>
@@ -50,14 +50,14 @@ class HomePage extends React.Component {
   }
 }
 
-const NavBar = () => {
-  return (
-    <section className="home-nav">
-      <span className="nav-text">梦 境 墙</span>
-      <img src={Toggle} alt="toggle-menu" className="toggle-menu" />
-    </section>
-  );
-};
+// const NavBar = () => {
+//   return (
+//     <section className="home-nav">
+//       <span className="nav-text">梦 境 墙</span>
+//       <img src={Toggle} alt="toggle-menu" className="toggle-menu" />
+//     </section>
+//   );
+// };
 
 const Footer = () => {
   return (

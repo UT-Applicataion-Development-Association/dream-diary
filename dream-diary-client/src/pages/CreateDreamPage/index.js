@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import backButton from "../assets/create_back_button.svg";
 import profile from "../assets/profile.svg";
+import NavBar from "../../components/NavBar/index";
 
 import "./create-page.scss";
 
@@ -9,9 +10,10 @@ class CreateDreamPage extends React.Component {
   render() {
     return (
       <div className="page create-dream-page">
-        <div className="profile-button">
+        {/* <div className="profile-button">
           <img src={profile} alt="profile-button" />
-        </div>
+        </div> */}
+        <NavBar title={""} />
         <Content />
         {/* <Footer /> */}
         {/* CREATE DREAM PAGE id={this.props.params.id} */}
