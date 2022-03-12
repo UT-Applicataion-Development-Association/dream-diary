@@ -1,10 +1,12 @@
 import React from "react";
 
-import { Route, Routes, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import HomePage from "pages/HomePage";
 import ViewDreamPage from "pages/ViewDreamPage";
 import CreateDreamPage from "pages/CreateDreamPage";
+import LoginPage from "pages/LoginPage";
+import SignupPage from "pages/SignupPage";
 
 export default class RenderRoutes extends React.Component {
   render() {
@@ -16,6 +18,10 @@ export default class RenderRoutes extends React.Component {
         <Route exact path="/dream/:id" element={<ViewDreamPage />} />
 
         <Route exact path="/create-dream/:id" element={<CreateDreamPage />} />
+
+        <Route exact path="/login" element={<LoginPage />} />
+
+        <Route exact path="/signup" element={<SignupPage />} />
 
         {/* NOT FOUND */}
         <Route component={() => <h1>Not Found!</h1>} />
