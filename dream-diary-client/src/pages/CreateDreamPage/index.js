@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import backButton from "../assets/create_back_button.svg";
-import profile from "../assets/profile.svg";
+import backButton from "../assets/back_button.svg";
 import NavBar from "../../components/NavBar/index";
 
 import "./create-page.scss";
@@ -52,16 +51,16 @@ const Content = () => {
   return (
     <>
       {/* <div className="dream-date">January 28, 2022</div> */}
-      <input
-        type="date"
-        id="date"
-        name="date"
-        value={date}
-        placeholder="日期"
-        className="dream-date"
-        onChange={(e) => setDate(e.target.value)}
-      />
       <form className="form" onSubmit={handleSubmit}>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          value={date}
+          placeholder="日期"
+          className="dream-date"
+          onChange={(e) => setDate(e.target.value)}
+        />
         <div className="text-container">
           <input
             type="text"
