@@ -7,7 +7,9 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //handle submit yup
+    // TODO: handle submit yup
+    console.log(email)
+
   };
 
   return (
