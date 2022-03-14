@@ -16,16 +16,35 @@ module.exports = {
         return newDream
     },
 
+    /**
+     * Find a Dream by id.
+     * @param {*} id Id of the target dream.
+     * @returns The retrieved Dream.
+     */
     retrieve: async (id) => {
-        // TODO: IMPLEMENT THIS
+        const dream = await Dream.findById(id).exec()
+        return dream
     },
 
+    /**
+     * Find a Dream by id and update it according to the update arg.
+     * @param {*} id Id of the target dream.
+     * @param {*} body Body of the update message.
+     * @returns The updated Dream.
+     */
     update: async (id, body) => {
-        // TODO: IMPLEMENT THIS
+        const dream = await Dream.findByIdAndUpdate(id, body, {new:true}).exec()
+        return dream
     },
 
+    /**
+     * Find a Dream by id and delete it.
+     * @param {*} id Id of the target dream.
+     * @returns The deleted dream.
+     */
     delete: async (id) => {
-        // TODO: IMPLEMENT THIS
+        const dream = await Dream.findByIdAndDelete(id).exec()
+        return dream
     },
 
     /**

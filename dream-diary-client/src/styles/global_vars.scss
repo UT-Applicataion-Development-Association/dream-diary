@@ -1,0 +1,70 @@
+$dark: #313131;
+$dark-gray: #3a3a3a;
+$light-gray: #8a8a8a;
+$light: #f3f3f3;
+
+$serif: Georgia, "Times New Roman", Times, serif;
+$sans-serif: Verdana, sans-serif;
+
+@mixin round-border($radius: 15px) {
+  border-radius: $radius;
+}
+
+@mixin box-shadow($scale: 3px, $color: #31313150) {
+  box-shadow: $scale $scale $scale $color;
+}
+
+@mixin mx($margin: auto) {
+  margin-left: $margin;
+  margin-right: $margin;
+}
+
+@mixin my($margin: auto) {
+  margin-top: $margin;
+  margin-bottom: $margin;
+}
+
+@mixin px($padding: auto) {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+@mixin py($padding: auto) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
+@mixin button(
+  $px: 2rem,
+  $py: 0.5rem,
+  $bg: $dark,
+  $color: white,
+  $bg-hover: $dark-gray,
+  $font-size: large,
+  $radius: 0,
+  $shadow: 3px
+) {
+  @include px($px);
+  @include py($py);
+  @include box-shadow($scale: $shadow);
+  font-size: $font-size;
+
+  background-color: $bg;
+  border: none;
+  color: $color;
+  transition-duration: 0.3s;
+  border-radius: $radius;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: $bg-hover;
+  }
+}
+
+@mixin flex-display($dir: column, $jc: center, $ai: center) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $jc;
+  align-items: $ai;
+}
