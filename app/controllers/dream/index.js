@@ -27,7 +27,7 @@ module.exports = {
             // const { title, content, tags, image } = req.body
 
             // Method 2:
-            const dreamer = req.params.user_id
+            const dreamer = req.user_id
             const body = {
                 title: req.body.title || "",
                 content: req.body.content || "Does not have content",
@@ -59,10 +59,16 @@ module.exports = {
         const id = req.params.dream_id
         try{
             const dreamServices = new DreamServices()
-            const removal_result = await dreamServices.deleteDream(id)
+            const check_dream = await dreamServices.getDream(id)
 
-            // return response
-            res.send(new Response({ entity: { removal_result } }))
+            if (check_dream["dreamer"] === user_id){
+                const removal_result = await dreamServices.deleteDream(id)
+                // return response
+                res.send(new Response({ entity: { removal_result } }))
+            }else{
+                res.send(500).send("hehehe nice try:)")
+                return;
+            }
         } catch (err) {
             console.error(err)
             res.status(500).send(new Response({ msg: err, status: 500 }));
@@ -88,28 +94,30 @@ module.exports = {
 
     updateDream: async (req, res) => {
         // FIXME: If a field is not provided, you will overwrite the original content
+        
         const id = req.params.dream_id
+        const user_id = req.user_id
         const updates = {
+            "title": req.body.title,
+            "date": req.body.date,
+            "content": req.body.content,
+            "tags": req.body.tags,
+            "image": req.body.image
         }
-        if (req.body.title !== undefined){
-            updates["title"] = req.body.title
-        }
-        if (req.body.content !== undefined){
-            updates["content"] = req.body.content
-        }
-        if (req.body.tags !== undefined){
-            updates["tags"] = req.body.tags
-        }
-        if (req.body.image !== undefined){
-            updates["image"] = req.body.image
-        }
+        Object.keys(updates).forEach(key => updates[key] === undefined && delete updates[key]);
         console.log(updates)
         try{
             const dreamServices = new DreamServices()
-            const updated_dream = await dreamServices.updateDream(id, updates)
+            const check_dream = await dreamServices.getDream(id)
 
-            // return response
-            res.send(new Response({ entity: { updated_dream } }))
+            if (check_dream["dreamer"] === user_id){
+                const updated_dream = await dreamServices.updateDream(id, updates)
+                // return response
+                res.send(new Response({ entity: { updated_dream } }))
+            }else{
+                res.send(500).send("hehehe nice try:)")
+                return;
+            }
         } catch (err) {
             console.error(err)
             res.status(500).send(new Response({ msg: err, status: 500 }));
