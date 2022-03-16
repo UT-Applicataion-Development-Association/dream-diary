@@ -1,0 +1,98 @@
+@import "@fontsource/zcool-qingke-huangyou"; // Defaults to weight 400.
+@import "../../styles/global_vars";
+
+.create-dream-page {
+  background: linear-gradient(
+    to bottom left,
+    #c7cfff,
+    #ffe7e7,
+    #fff2de,
+    #c7cfff
+  );
+  // background: #e0deff;
+}
+
+// .create-footer {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   width: 100vw;
+//   height: 8rem;
+// }
+
+.profile-button {
+  height: 6rem;
+  padding-left: 80%;
+  padding-top: 3rem;
+}
+
+.dream-date {
+  width: 40%;
+  background-color: #4a4e69;
+  color: #ffffff;
+  font-size: 20px;
+  margin-left: 2rem;
+  padding: 5px 5px 5px 10px;
+  border-radius: 0px 10px 0px 0px;
+  border: none;
+  outline: none;
+}
+
+.form {
+  height: 87vh;
+}
+
+.text-container {
+  height: 60%;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  border: 1px solid #22223b;
+  border-radius: 0px 10px 10px 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.create-dream-title {
+  width: 100%;
+  height: 5%;
+  border: none;
+  padding: 10px 10px;
+  font-size: 20px;
+  background-color: transparent;
+  outline: none;
+}
+
+.create-dream-description {
+  width: 90%;
+  height: 85%;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 0px 10px 10px 10px;
+  background-color: #f8f8f8;
+  font-size: 20px;
+  resize: none;
+  outline: none;
+}
+
+.create-button {
+  border: 1px solid #22223b;
+  border-radius: 25px 25px 25px 25px;
+  background: linear-gradient(to right, #dee2ff, white, #dee2ff);
+  padding: 1rem 2rem 1rem 2rem;
+  color: #22223b;
+  font-size: 1rem;
+}
+
+.submit-button {
+  padding-right: 3rem;
+}
+
+.create-dream-footer {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
