@@ -16,7 +16,7 @@ router.get(
 )
 
 router.get(
-    "/:user_id/dreams",
+    "/user/:user_id/dreams",
     // Middlewares
     mongoChecker,
     authChecker,
@@ -26,7 +26,7 @@ router.get(
 
 // get a specific dream
 router.get(
-    "/:user_id/dreams/:dream_id",
+    "/user/:user_id/dreams/:dream_id",
     // Middlewares
     mongoChecker,
     authChecker,
@@ -35,21 +35,21 @@ router.get(
 )
 
 router.post(
-    "/:user_id/dreams",
+    "/user/:user_id/dreams",
     mongoChecker,
     //authChecker,
     dreamController.createDream
 )
 
 router.delete(
-    "/:user_id/dreams/:dream_id",
+    "/user/:user_id/dreams/:dream_id",
     mongoChecker,
     authChecker,
     dreamController.deleteDream
 )
 
 router.put(
-    "/:user_id/dreams/:dream_id",
+    "/user/:user_id/dreams/:dream_id",
     mongoChecker,
     //authChecker,
     dreamController.updateDream
