@@ -1,11 +1,10 @@
-const { mongoose } = require('../db/mongoose')
 const { Dream } = require('../models')
 
 module.exports = {
     /**
      * Add a new Dream to db.
      * @param {*} body Body of the new dream.
-     * @returns The created Dream.
+     * @return {any} The created Dream.
      */
     create: async (body) => {
         // Create a new dream
@@ -19,7 +18,7 @@ module.exports = {
     /**
      * Find a Dream by id.
      * @param {*} id Id of the target dream.
-     * @returns The retrieved Dream.
+     * @return {any} The retrieved Dream.
      */
     retrieve: async (id) => {
         const dream = await Dream.findById(id).exec()
@@ -30,17 +29,19 @@ module.exports = {
      * Find a Dream by id and update it according to the update arg.
      * @param {*} id Id of the target dream.
      * @param {*} body Body of the update message.
-     * @returns The updated Dream.
+     * @return {any} The updated Dream.
      */
     update: async (id, body) => {
-        const dream = await Dream.findByIdAndUpdate(id, body, {new:true}).exec()
+        const dream = await Dream.findByIdAndUpdate(id, body, {
+            new: true,
+        }).exec()
         return dream
     },
 
     /**
      * Find a Dream by id and delete it.
      * @param {*} id Id of the target dream.
-     * @returns The deleted dream.
+     * @return {any} The deleted dream.
      */
     delete: async (id) => {
         const dream = await Dream.findByIdAndDelete(id).exec()
@@ -49,12 +50,12 @@ module.exports = {
 
     /**
      * Find an array of Dreams that satisfy the filter.
-     * @param {Object} filter 
-     * @returns Array of Dreams.
+     * @param {Object} filter
+     * @return {[any]} Array of Dreams.
      */
     find: async (filter) => {
         // Query by filter
         const dreams = await Dream.find(filter).exec()
         return dreams
-    }
+    },
 }

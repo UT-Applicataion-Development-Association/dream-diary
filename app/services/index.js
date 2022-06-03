@@ -1,4 +1,4 @@
 module.exports = {
     Dream: require('./dream'),
-    User: require('./user')
+    User: require('./user'),
 }

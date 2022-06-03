@@ -7,7 +7,7 @@ async function get(route, params = {}) {
 
   // Append query params to url
   Object.keys(params).forEach((key) =>
-    url.searchParams.append(key, params[key])
+    url.searchParams.append(key, params[key]),
   )
   // console.log("GET", url)
 

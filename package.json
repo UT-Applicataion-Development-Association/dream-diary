@@ -11,7 +11,8 @@
     "setup": "npm install && cd dream-diary-client && npm install && cd ..",
     "build-client": "cd dream-diary-client && npm run build && cd ..",
     "client": "cd dream-diary-client && npm start && cd ..",
-    "deploy": "NODE_ENV=production node app/index.js"
+    "deploy": "NODE_ENV=production node app/index.js",
+    "lint": "eslint --fix --ext .js,.jsx ."
   },
   "repository": {
     "type": "git",
