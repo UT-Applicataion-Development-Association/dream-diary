@@ -1,17 +1,21 @@
-const origin = process.env.REACT_APP_ORIGIN || window.location.protocol + "//" + window.location.host
+const origin =
+  process.env.REACT_APP_ORIGIN ||
+  window.location.protocol + '//' + window.location.host
 
 async function get(route, params = {}) {
   const url = new URL(origin + route)
 
   // Append query params to url
-  Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+  Object.keys(params).forEach((key) =>
+    url.searchParams.append(key, params[key])
+  )
   // console.log("GET", url)
 
   const response = await fetch(url, {
     method: 'GET',
     mode: 'cors',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
   })
 
@@ -26,9 +30,9 @@ async function post(route, data = {}) {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
 
     return { response, body: await response.json() }
@@ -44,9 +48,9 @@ async function put(route, data = {}) {
     method: 'PUT',
     mode: 'cors',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
 
   return { response, body: await response.json() }
@@ -59,12 +63,12 @@ async function del(route, data = {}) {
     method: 'DELETE',
     mode: 'cors',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
 
   return { response, body: await response.json() }
 }
 
-export { get, post, put, del };
+export { get, post, put, del }
