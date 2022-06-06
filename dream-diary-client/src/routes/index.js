@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import HomePage from 'pages/HomePage'
 import ViewDreamPage from 'pages/ViewDreamPage'
 
-export default RenderRoutes = () => {
+const RenderRoutes = () => {
   return (
     <Routes>
       {/* HOME */}
@@ -18,3 +18,5 @@ export default RenderRoutes = () => {
     </Routes>
   )
 }
+
+export default RenderRoutes
