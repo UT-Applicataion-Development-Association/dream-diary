@@ -1,5 +1,4 @@
-@import "@fontsource/zcool-qingke-huangyou"; // Defaults to weight 400.
-@import "../../styles/global_vars";
+@import '../../styles/global_vars';
 
 .create-dream-page {
   background: linear-gradient(
@@ -11,14 +10,6 @@
   );
   // background: #e0deff;
 }
-
-// .create-footer {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   width: 100vw;
-//   height: 8rem;
-// }
 
 .profile-button {
   height: 6rem;
@@ -84,15 +75,7 @@
   font-size: 1rem;
 }
 
-.submit-button {
-  padding-right: 3rem;
-}
-
 .create-dream-footer {
-  height: 10%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
+  @include flex-display;
+  margin-top: 16px;
 }

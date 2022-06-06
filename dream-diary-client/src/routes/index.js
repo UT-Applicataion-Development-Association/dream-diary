@@ -16,7 +16,7 @@ const RenderRoutes = () => {
 
       <Route exact path="/dream/:id" element={<ViewDreamPage />} />
 
-      <Route exact path="/create-dream/:id" element={<CreateDreamPage />} />
+      <Route exact path="/new-dream" element={<CreateDreamPage />} />
 
       <Route exact path="/login" element={<LoginPage />} />
 
