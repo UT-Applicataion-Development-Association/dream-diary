@@ -1,4 +1,4 @@
-const { Response, response } = require("../utils/response")
+const { Response, response } = require('../utils/response')
 
 const { mongoose } = require('../db/mongoose')
 
@@ -7,7 +7,7 @@ module.exports.mongoChecker = (req, res, next) => {
     if (mongoose.connection.readyState != 1) {
         console.log('Issue with mongoose connection')
         res.status(500).send(response.INTERNAL_SERVER_ERROR)
-        return;
+        return
     } else {
         next()
     }

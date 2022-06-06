@@ -1,4 +1,4 @@
-module.exports = { 
-    auth: require("./auth"), 
-    dream: require("./dream"), 
-};
+module.exports = {
+    auth: require('./auth'),
+    dream: require('./dream'),
+}
