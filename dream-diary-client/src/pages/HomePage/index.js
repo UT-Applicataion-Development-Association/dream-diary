@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import Dream4 from '../assets/dream4.svg'
 import NavBar from '../../components/NavBar/index'
 import Footer from 'components/Footer'
@@ -13,25 +14,23 @@ const placeholders = [
   { _id: 4, image: Dream4 },
 ]
 
-class HomePage extends React.Component {
-  render() {
-    return (
-      <div className="page home-page">
-        <NavBar title={'梦 境 墙'} />
-        <main className="home-main">
-          <DreamFeed />
-        </main>
-        <Footer addButton />
-      </div>
-    )
-  }
+const HomePage = () => {
+  return (
+    <div className="page home-page">
+      <NavBar title={'梦 境 墙'} />
+      <main className="home-main">
+        <DreamFeed />
+      </main>
+      <Footer addButton />
+    </div>
+  )
 }
 
 const DreamFeed = () => {
   return (
     <section className="dream-feed">
       {placeholders.map((dream) => {
-        return <DreamItem dream={dream}></DreamItem>
+        return <DreamItem key={dream._id} dream={dream}></DreamItem>
       })}
     </section>
   )

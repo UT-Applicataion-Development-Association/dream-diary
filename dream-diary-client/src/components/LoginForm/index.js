@@ -1,8 +1,11 @@
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import UserContext from 'stores/UserContext'
 import './login-form.scss'
 
 const loginUser = async (email, password) => {
+  // TODO: submit to backend
   const _id = Math.floor(Math.random() * 100)
   const username = 'Test User'
   const token = `${Math.floor(Math.random() * 10000)}`
@@ -10,19 +13,21 @@ const loginUser = async (email, password) => {
 }
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   const userCtx = useContext(UserContext)
 
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    //handle submit yup
+
     try {
       const user = await loginUser(email, password)
       if (user) {
         userCtx.dispatch({ type: 'SET', value: user })
-        console.log(userCtx)
+        navigate('/')
       } else {
         throw new Error('Invalid email or password')
       }
@@ -42,7 +47,7 @@ const LoginForm = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        type="text"
+        type="password"
         value={password}
         placeholder="密码"
         name="password"
