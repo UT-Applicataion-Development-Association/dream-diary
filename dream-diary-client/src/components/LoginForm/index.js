@@ -2,13 +2,19 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import UserContext from 'stores/UserContext'
-import './login-form.scss'
+import { randomToken } from 'utils/random'
+import './LoginForm.scss'
 
 const loginUser = async (email, password) => {
   // TODO: submit to backend
-  const _id = Math.floor(Math.random() * 100)
+  const _id = randomToken()
   const username = 'Test User'
-  const token = `${Math.floor(Math.random() * 10000)}`
+  const token = randomToken()
+
+  if (email !== 'test@test.com') {
+    return null
+  }
+
   return { user: { _id, email, username }, token }
 }
 
@@ -20,16 +26,18 @@ const LoginForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const [errorMsg, setErrorMsg] = useState('')
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      const user = await loginUser(email, password)
-      if (user) {
-        userCtx.dispatch({ type: 'SET', value: user })
+      const loginInfo = await loginUser(email, password)
+      if (loginInfo) {
+        userCtx.dispatch({ type: 'SET', state: loginInfo })
         navigate('/')
       } else {
-        throw new Error('Invalid email or password')
+        setErrorMsg('Invalid email or password')
       }
     } catch (err) {
       alert(err)
@@ -54,7 +62,8 @@ const LoginForm = () => {
         className="login-form-input"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit" className="login-form-btn">
+      {errorMsg && <div className="error-message">{errorMsg}</div>}
+      <button type="submit" className="submit-btn">
         登录
       </button>
     </form>

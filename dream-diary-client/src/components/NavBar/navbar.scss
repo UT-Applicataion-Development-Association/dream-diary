@@ -1,23 +1,24 @@
-@import "@fontsource/zcool-qingke-huangyou"; // Defaults to weight 400.
+@import '../../styles/global_vars';
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 13vh;
-}
+  height: 100px;
 
-.nav-text {
-  color: #464660;
-  font-family: "ZCOOL QingKe HuangYou";
-  font-size: 2.5rem;
-  height: 2.5rem;
-  margin-left: 2rem;
-  text-shadow: #a8a8b4 0px 2px 3px;
-}
+  .nav-text {
+    color: #464660;
+    font-family: $sans-serif;
+    font-size: 2.5rem;
+    height: 2.5rem;
+    margin-left: 2rem;
+    text-shadow: #a8a8b4 0px 2px 3px;
+    font-weight: normal;
+  }
 
-.toggle-menu {
-  height: 2.5rem;
-  margin-right: 2rem;
+  .toggle-menu {
+    height: 2.5rem;
+    margin-right: 2rem;
+  }
 }

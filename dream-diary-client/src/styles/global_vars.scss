@@ -2,8 +2,10 @@ $dark: #313131;
 $dark-gray: #3a3a3a;
 $light-gray: #8a8a8a;
 $light: #f3f3f3;
+$error: #d34059;
+$success: #3de295;
 
-$serif: Georgia, "Times New Roman", Times, serif;
+$serif: Georgia, 'Times New Roman', Times, serif;
 $sans-serif: Verdana, sans-serif;
 
 @mixin round-border($radius: 15px) {
@@ -12,6 +14,10 @@ $sans-serif: Verdana, sans-serif;
 
 @mixin box-shadow($scale: 3px, $color: #31313150) {
   box-shadow: $scale $scale $scale $color;
+}
+
+@mixin box-light-shadow($color: #464660ee) {
+  box-shadow: 0 16px 20px -20px $color;
 }
 
 @mixin mx($margin: auto) {
@@ -67,4 +73,15 @@ $sans-serif: Verdana, sans-serif;
   flex-direction: $dir;
   justify-content: $jc;
   align-items: $ai;
+}
+
+@mixin gradient-bg() {
+  background-color: $light;
+  background: linear-gradient(
+    to bottom left,
+    #c7cfff,
+    #ffe7e7,
+    #fff2de,
+    #c7cfff
+  );
 }

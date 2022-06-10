@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import "./signup-form.scss";
+import React, { useState } from 'react'
+import './SignupForm.scss'
 
 const SignupForm = () => {
-  const [username, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    //handle submit yup
-  };
+    e.preventDefault()
+    // TODO: handle submit yup
+  }
 
   return (
     <form onSubmit={handleSubmit} className="signup-form">
@@ -19,7 +19,7 @@ const SignupForm = () => {
         placeholder="用户名"
         name="username"
         className="signup-form-input"
-        onchange={(e) => setUserName(e.target.value)}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <input
         type="email"
@@ -30,18 +30,18 @@ const SignupForm = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        type="text"
+        type="password"
         value={password}
         placeholder="密码"
         name="password"
         className="signup-form-input"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit" className="singup-form-btn">
+      <button type="submit" className="submit-btn">
         注册
       </button>
     </form>
-  );
-};
+  )
+}
 
-export default SignupForm;
+export default SignupForm

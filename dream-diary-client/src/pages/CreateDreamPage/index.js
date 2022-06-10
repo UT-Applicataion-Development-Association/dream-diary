@@ -1,30 +1,10 @@
-import React, { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import NavBar from 'components/NavBar/index'
 
+import UserContext from 'stores/UserContext'
+
 import './create-page.scss'
-
-class CreateDreamPage extends React.Component {
-  render() {
-    return (
-      <div className="page create-dream-page">
-        {/* <div className="profile-button">
-          <img src={profile} alt="profile-button" />
-        </div> */}
-        <NavBar title={''} back />
-        <Content />
-        {/* <Footer /> */}
-        {/* CREATE DREAM PAGE id={this.props.params.id} */}
-      </div>
-    )
-  }
-}
-
-// Wrap the class component within a function component to use hooks
-const CreateDreamPageWrapper = (props) => {
-  const params = useParams()
-  return <CreateDreamPage params={params} {...props} />
-}
 
 // const Footer = () => {
 //   return (
@@ -37,7 +17,7 @@ const CreateDreamPageWrapper = (props) => {
 //   );
 // };
 
-const Content = () => {
+const DreamEditor = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
@@ -89,4 +69,22 @@ const Content = () => {
   )
 }
 
-export default CreateDreamPageWrapper
+const CreateDreamPage = (props) => {
+  const navigate = useNavigate()
+  const userCtx = useContext(UserContext)
+
+  // If not logged-in, then return
+  if (!userCtx.token) {
+    navigate(-1)
+  }
+
+  return (
+    <div className="page create-dream-page">
+      <NavBar title={''} back />
+      <DreamEditor />
+      {/* <Footer /> */}
+    </div>
+  )
+}
+
+export default CreateDreamPage

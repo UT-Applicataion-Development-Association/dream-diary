@@ -1,76 +1,35 @@
-@import "../../styles/global_vars";
-@import "@fontsource/zcool-qingke-huangyou"; // Defaults to weight 400.
+@import '../../styles/global_vars';
 
 .home-page {
-  background-color: $light;
-  background: linear-gradient(
-    to bottom left,
-    #c7cfff,
-    #ffe7e7,
-    #fff2de,
-    #c7cfff
-  );
-  // background: rgba(222, 224, 255, 0.7);
-}
+  .home-main {
+    width: 100vw;
+    height: calc(100vh - 200px);
+    @include flex-display($jc: 'flex-start');
 
-.home-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100vw;
-  height: 13vh;
-}
+    .dream-feed {
+      /* Masonry container */
+      display: grid;
+      column-count: 2;
+      // width: 90%;
+      grid-template-columns: 50% 50%;
+      overflow-y: scroll;
+      margin: 0;
+      // height:
+      // display: grid;
+      // grid-template-columns: auto auto;
+    }
 
-.home-main {
-  width: 100vw;
-  // min-height: 50vh;
-  height: 74vh;
-  @include flex-display;
-}
+    .scrollable-container {
+      width: 90%;
+      height: auto;
+    }
 
-.nav-text {
-  color: #464660;
-  font-family: "ZCOOL QingKe HuangYou";
-  font-size: 2.5rem;
-  height: 2.5rem;
-  margin-left: 2rem;
-  text-shadow: #a8a8b4 0px 2px 3px;
-}
-
-.toggle-menu {
-  height: 2.5rem;
-  margin-right: 2rem;
-}
-
-
-
-// .dream-feed {
-//   display: grid;
-//   grid-template-columns: auto auto;
-// }
-
-.dream-feed {
-  /* Masonry container */
-  display: grid;
-  column-count: 2;
-  // width: 90%;
-  grid-template-columns: 50% 50%;
-  overflow: scroll;
-  margin: 0;
-  // height:
-  // display: grid;
-  // grid-template-columns: auto auto;
-}
-
-.scrollable-container {
-  width: 90%;
-  height: auto;
-}
-
-.dream {
-  /* Masonry bricks or child elements */
-  display: inline-block;
-  margin: auto auto;
-  width: 40vw;
-  height: auto;
+    .dream {
+      /* Masonry bricks or child elements */
+      display: inline-block;
+      margin: auto auto;
+      width: 40vw;
+      height: auto;
+    }
+  }
 }
