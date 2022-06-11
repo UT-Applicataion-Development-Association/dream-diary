@@ -18,7 +18,7 @@ const Dream = mongoose.model('Dream', {
         type: String,
         trim: true,
     },
-    dreamer: {
+    author: {
         type: mongoose.Schema.Types.ObjectId,
         // required: true
     },

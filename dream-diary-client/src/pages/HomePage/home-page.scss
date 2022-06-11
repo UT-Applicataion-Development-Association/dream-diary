@@ -2,33 +2,22 @@
 
 .home-page {
   .home-main {
-    width: 100vw;
-    height: calc(100vh - 200px);
+    width: 100%;
+    height: calc(100vh - #{$navbar-height} - #{$footer-height});
     @include flex-display($jc: 'flex-start');
+    overflow-y: scroll;
 
     .dream-feed {
-      /* Masonry container */
       display: grid;
       column-count: 2;
-      // width: 90%;
       grid-template-columns: 50% 50%;
-      overflow-y: scroll;
-      margin: 0;
-      // height:
-      // display: grid;
-      // grid-template-columns: auto auto;
-    }
 
-    .scrollable-container {
-      width: 90%;
-      height: auto;
+      margin: 0;
     }
 
     .dream {
-      /* Masonry bricks or child elements */
       display: inline-block;
-      margin: auto auto;
-      width: 40vw;
+      width: 100%;
       height: auto;
     }
   }

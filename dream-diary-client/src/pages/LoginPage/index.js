@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import LoginForm from '../../components/LoginForm'
+import LoginForm from 'components/LoginForm'
 
 import UserContext from 'stores/UserContext'
 
 import './login-page.scss'
-import { useEffect } from 'react'
 
 const LoginPage = () => {
   const userCtx = useContext(UserContext)
@@ -18,7 +17,7 @@ const LoginPage = () => {
 
   return (
     <div className="page login-page">
-      <div className="login-page-title">登 录</div>
+      <div className="login-page-title">登录</div>
       <LoginForm />
       <div className="link-to-signup">
         还没有账号？

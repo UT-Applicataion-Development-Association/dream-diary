@@ -14,10 +14,10 @@ class DreamServices {
         return dreams
     }
 
-    async createDream(title, dreamer, content, tags, image) {
+    async createDream(title, author, content, tags, image) {
         const dream = await dreamDao.create({
             title,
-            dreamer,
+            author,
             content,
             tags,
             image,

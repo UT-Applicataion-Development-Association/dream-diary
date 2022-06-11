@@ -1,21 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import NavBar from 'components/NavBar/index'
+import NavBar from 'components/UI/NavBar'
 
 import UserContext from 'stores/UserContext'
 
 import './create-page.scss'
-
-// const Footer = () => {
-//   return (
-//     <section className="create-footer">
-//       <img src={backButton} alt="back-button" className="back-button" />
-//       <button>
-//         <span className="create-button-text">生 成 梦 境</span>
-//       </button>
-//     </section>
-//   );
-// };
 
 const DreamEditor = () => {
   const [title, setTitle] = useState('')
@@ -58,12 +47,11 @@ const DreamEditor = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
+
       <div className="create-dream-footer">
-        <div className="submit-button">
-          <button type="submit" className="create-button">
-            生 成 梦 境
-          </button>
-        </div>
+        <button type="submit" className="submit-button">
+          生 成 梦 境
+        </button>
       </div>
     </form>
   )

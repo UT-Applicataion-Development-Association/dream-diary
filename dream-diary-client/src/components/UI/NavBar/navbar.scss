@@ -1,24 +1,29 @@
-@import '../../styles/global_vars';
+@import '../../../styles/global_vars';
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 100px;
+  height: $navbar-height;
+
+  .nav-left {
+    margin-left: 5%;
+  }
 
   .nav-text {
-    color: #464660;
+    color: $bg-color;
     font-family: $sans-serif;
-    font-size: 2.5rem;
-    height: 2.5rem;
-    margin-left: 2rem;
+    margin-left: 5%;
     text-shadow: #a8a8b4 0px 2px 3px;
     font-weight: normal;
   }
 
+  .nav-right {
+    margin-right: 5%;
+  }
+
   .toggle-menu {
     height: 2.5rem;
-    margin-right: 2rem;
   }
 }

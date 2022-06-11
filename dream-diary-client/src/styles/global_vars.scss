@@ -1,12 +1,17 @@
 $dark: #313131;
 $dark-gray: #3a3a3a;
 $light-gray: #8a8a8a;
+$bg-color: #4a4e69;
+$bg-dark: #363a52;
 $light: #f3f3f3;
 $error: #d34059;
 $success: #3de295;
 
 $serif: Georgia, 'Times New Roman', Times, serif;
 $sans-serif: Verdana, sans-serif;
+
+$navbar-height: 100px;
+$footer-height: 100px;
 
 @mixin round-border($radius: 15px) {
   border-radius: $radius;
@@ -43,11 +48,11 @@ $sans-serif: Verdana, sans-serif;
 @mixin button(
   $px: 2rem,
   $py: 0.5rem,
-  $bg: $dark,
+  $bg: $bg-color,
   $color: white,
-  $bg-hover: $dark-gray,
+  $bg-hover: $bg-dark,
   $font-size: large,
-  $radius: 0,
+  $radius: 15px,
   $shadow: 3px
 ) {
   @include px($px);
@@ -84,4 +89,8 @@ $sans-serif: Verdana, sans-serif;
     #fff2de,
     #c7cfff
   );
+}
+
+.button {
+  @include button;
 }
