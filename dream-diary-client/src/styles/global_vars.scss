@@ -3,9 +3,8 @@ $dark-gray: #3a3a3a;
 $light-gray: #8a8a8a;
 $light: #f3f3f3;
 
-$serif: Georgia, 'Times New Roman', Times, serif;
+$serif: Georgia, "Times New Roman", Times, serif;
 $sans-serif: Verdana, sans-serif;
-
 
 @mixin round-border($radius: 15px) {
   border-radius: $radius;
@@ -25,7 +24,6 @@ $sans-serif: Verdana, sans-serif;
   margin-bottom: $margin;
 }
 
-
 @mixin px($padding: auto) {
   padding-left: $padding;
   padding-right: $padding;
@@ -36,7 +34,16 @@ $sans-serif: Verdana, sans-serif;
   padding-bottom: $padding;
 }
 
-@mixin button($px: 2rem, $py: .5rem, $bg: $dark, $color: white, $bg-hover: $dark-gray, $font-size: large, $radius: 0, $shadow: 3px) {
+@mixin button(
+  $px: 2rem,
+  $py: 0.5rem,
+  $bg: $dark,
+  $color: white,
+  $bg-hover: $dark-gray,
+  $font-size: large,
+  $radius: 0,
+  $shadow: 3px
+) {
   @include px($px);
   @include py($py);
   @include box-shadow($scale: $shadow);
@@ -45,13 +52,13 @@ $sans-serif: Verdana, sans-serif;
   background-color: $bg;
   border: none;
   color: $color;
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   border-radius: $radius;
 
   cursor: pointer;
 
   &:hover {
-      background-color: $bg-hover;
+    background-color: $bg-hover;
   }
 }
 
