@@ -1,29 +1,18 @@
-@import "@fontsource/zcool-qingke-huangyou"; // Defaults to weight 400.
+@import '../../styles/global_vars';
 
 .login-page {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  background: linear-gradient(
-    to bottom left,
-    #c7cfff,
-    #ffe7e7,
-    #fff2de,
-    #c7cfff
-  );
-}
+  @include flex-display;
 
-.login-page-title {
-  font-family: "ZCOOL QingKe HuangYou";
-  color: #464660;
-  margin-bottom: 1.5em;
-  font-size: 2.5rem;
-}
+  .login-page-title {
+    font-family: $sans-serif;
+    color: #464660;
+    margin-bottom: 1.5em;
+    font-size: 2.5rem;
+  }
 
-.link-to-signup {
-  color: #464660;
-  opacity: 0.75;
+  .link-to-signup {
+    margin-top: 20px;
+    color: #464660;
+    opacity: 0.75;
+  }
 }

@@ -1,16 +1,48 @@
-import React, { useState } from "react";
-import "./login-form.scss";
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import UserContext from 'stores/UserContext'
+import { randomToken } from 'utils/random'
+import './LoginForm.scss'
+
+const loginUser = async (email, password) => {
+  // TODO: submit to backend
+  const _id = randomToken()
+  const username = 'Test User'
+  const token = randomToken()
+
+  if (email !== 'test@test.com') {
+    return null
+  }
+
+  return { user: { _id, email, username }, token }
+}
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: handle submit yup
-    console.log(email)
+  const userCtx = useContext(UserContext)
 
-  };
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const loginInfo = await loginUser(email, password)
+      if (loginInfo) {
+        userCtx.dispatch({ type: 'SET', state: loginInfo })
+        navigate('/')
+      } else {
+        setErrorMsg('Invalid email or password')
+      }
+    } catch (err) {
+      alert(err)
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
@@ -23,18 +55,19 @@ const LoginForm = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        type="text"
+        type="password"
         value={password}
         placeholder="密码"
         name="password"
         className="login-form-input"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit" className="login-form-btn">
+      {errorMsg && <div className="error-message">{errorMsg}</div>}
+      <button type="submit" className="submit-btn">
         登录
       </button>
     </form>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

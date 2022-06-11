@@ -1,0 +1,29 @@
+@import '../../../styles/global_vars';
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: $navbar-height;
+
+  .nav-left {
+    margin-left: 5%;
+  }
+
+  .nav-text {
+    color: $bg-color;
+    font-family: $sans-serif;
+    margin-left: 5%;
+    text-shadow: #a8a8b4 0px 2px 3px;
+    font-weight: normal;
+  }
+
+  .nav-right {
+    margin-right: 5%;
+  }
+
+  .toggle-menu {
+    height: 2.5rem;
+  }
+}

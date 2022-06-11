@@ -1,0 +1,42 @@
+@import '../../styles/global_vars';
+
+.login-form {
+  width: 70%;
+  max-width: 400px;
+
+  input {
+    width: 100%;
+
+    box-sizing: border-box;
+    margin-bottom: 1.5em;
+    padding: 1rem 1.8rem 1rem 1.8rem;
+
+    background-color: #ffffff;
+
+    @include round-border;
+    border: none;
+    outline: none;
+
+    @include box-light-shadow;
+  }
+
+  .error-message {
+    color: $error;
+    @include mx;
+    text-align: center;
+  }
+
+  .submit-btn {
+    margin-top: 2rem;
+    background-color: #464660;
+    color: white;
+    border: none;
+    box-sizing: border-box;
+    padding: 1.2rem;
+    width: 100%;
+    cursor: pointer;
+
+    @include round-border;
+    @include box-light-shadow($color: #15151d);
+  }
+}

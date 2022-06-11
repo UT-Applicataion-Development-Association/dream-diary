@@ -1,0 +1,22 @@
+@import '../../../styles/global_vars';
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 100px;
+  background: white;
+  @include flex-display;
+
+  .add-button {
+  }
+
+  .create-button {
+    border: 1px solid #22223b;
+    border-radius: 25px 25px 25px 25px;
+    background: $light;
+    padding: 1rem 2rem 1rem 2rem;
+    color: #22223b;
+    font-size: 1rem;
+  }
+}

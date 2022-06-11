@@ -1,0 +1,30 @@
+@import '../../../styles/global_vars';
+
+.drawer-left {
+  left: 0;
+}
+
+.drawer-right {
+  right: 0;
+}
+
+.drawer {
+  position: fixed;
+
+  top: 0;
+  bottom: 0;
+  background-color: $light;
+  z-index: 888;
+}
+
+.drawer-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: #00000050;
+  backdrop-filter: blur(5px);
+  z-index: 887;
+}
