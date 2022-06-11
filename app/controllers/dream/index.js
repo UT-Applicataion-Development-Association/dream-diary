@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const DreamServices = require('../../services').Dream
 const { Response, response } = require('../../utils/response')
 
@@ -5,11 +6,15 @@ module.exports = {
     getDreams: async (req, res) => {
         try {
             // Get request data
-            const pagination = req.query?.pagination || 0
+            const filter = req.query.search
+            const pagination = {
+                page: req.query.page,
+                limit: 10,
+            }
 
             // Get dreams from services
             const dreamServices = new DreamServices()
-            const dreams = await dreamServices.getDreams({ pagination })
+            const dreams = await dreamServices.getDreams(filter, pagination)
 
             // Return response
             res.send(new Response({ entity: { dreams } }))
@@ -21,36 +26,18 @@ module.exports = {
 
     createDream: async (req, res) => {
         try {
-            // FIXME: get user
             // Get request data
-            // Method 1:
-            // const { title, content, tags, image } = req.body
-
-            // Method 2:
-            const author = req.user_id
+            const author = req.user._id
             const body = {
                 title: req.body.title || '',
-                content: req.body.content || 'Does not have content',
+                content: req.body.content || 'No content',
                 tags: req.body.tags || [],
-                image: req.body.image || '',
+                image: req.body.image || null,
             }
-
-            // Method 3:
-            // const fields = ['title', 'content', 'tags', 'image']
-            // const body = {}
-            // fields.forEach(field => {
-            //     body[field] = req.body[field]
-            // })
 
             // Create dreams in database
             const dreamServices = new DreamServices()
-            const dream = await dreamServices.createDream(
-                body.title,
-                author,
-                body.content,
-                body.tags,
-                body.image
-            )
+            const dream = await dreamServices.createDream({ ...body, author })
 
             // Return response
             res.send(new Response({ entity: { dream } }))
@@ -61,17 +48,23 @@ module.exports = {
     },
 
     deleteDream: async (req, res) => {
-        // TODO:
         const id = req.params.dream_id
         try {
             const dreamServices = new DreamServices()
-            const check_dream = await dreamServices.getDream(id)
+            const targetDream = await dreamServices.getDream(id)
 
-            if (check_dream['dreamer'] === user_id) {
-                const removal_result = await dreamServices.deleteDream(id)
-                // return response
-                res.send(new Response({ entity: { removal_result } }))
+            if (
+                String(targetDream.author) === req.user._id ||
+                req.user.isAdmin
+            ) {
+                const removedDream = await dreamServices.deleteDream(id)
+                if (removedDream) {
+                    res.send(new Response({ entity: { dream: removedDream } }))
+                } else {
+                    res.status(404).send(response.NOT_FOUND)
+                }
             } else {
+                // Not allowed to remove other's dream except for admin
                 res.status(403).send(response.FORBIDDEN)
             }
         } catch (err) {
@@ -81,14 +74,16 @@ module.exports = {
     },
 
     getDream: async (req, res) => {
-        // TODO:
         const id = req.params.dream_id
         try {
             const dreamServices = new DreamServices()
             const dream = await dreamServices.getDream(id)
 
-            // return response
-            res.send(new Response({ entity: { dream } }))
+            if (dream) {
+                res.send(new Response({ entity: { dream } }))
+            } else {
+                res.status(404).send(response.NOT_FOUND)
+            }
         } catch (err) {
             console.error(err)
             res.status(500).send(new Response({ msg: err, status: 500 }))
@@ -99,7 +94,7 @@ module.exports = {
         // FIXME: If a field is not provided, you will overwrite the original content
 
         const id = req.params.dream_id
-        const user_id = req.user_id
+
         const updates = {
             title: req.body.title,
             date: req.body.date,
@@ -107,21 +102,29 @@ module.exports = {
             tags: req.body.tags,
             image: req.body.image,
         }
+        // Remove unprovided fields
         Object.keys(updates).forEach(
             (key) => updates[key] === undefined && delete updates[key]
         )
-        console.log(updates)
+
         try {
             const dreamServices = new DreamServices()
-            const check_dream = await dreamServices.getDream(id)
+            const targetDream = await dreamServices.getDream(id)
 
-            if (check_dream['dreamer'] === user_id) {
-                const updated_dream = await dreamServices.updateDream(
+            if (
+                String(targetDream.author) === req.user._id ||
+                req.user.isAdmin
+            ) {
+                const updatedDream = await dreamServices.updateDream(
                     id,
                     updates
                 )
-                // return response
-                res.send(new Response({ entity: { updated_dream } }))
+
+                if (updatedDream) {
+                    res.send(new Response({ entity: { dream: updatedDream } }))
+                } else {
+                    res.status(404).send(response.NOT_FOUND)
+                }
             } else {
                 res.status(403).send(response.FORBIDDEN)
             }

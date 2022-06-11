@@ -17,7 +17,11 @@ function authenticateToken(req, res, next) {
     try {
         const decodedInfo = jwt.verify(token, config.secretKey)
         req.email = decodedInfo.email
-        req.userId = decodedInfo.userId
+        req.user = {
+            _id: decodedInfo.userId,
+            email: decodedInfo.email,
+            isAdmin: decodedInfo.isAdmin,
+        }
         next()
     } catch (error) {
         res.status(401).send(response.UNAUTHORIZED + error.message)

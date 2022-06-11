@@ -4,8 +4,8 @@ const { userDao } = require('../../dao')
 const config = require('../../../configs')
 
 class UserServices {
-    generateToken(id, email) {
-        return jwt.sign({ userId: id, email: email }, config.secretKey, {
+    generateToken(id, email, isAdmin) {
+        return jwt.sign({ userId: id, email, isAdmin }, config.secretKey, {
             expiresIn: '1d',
         })
     }

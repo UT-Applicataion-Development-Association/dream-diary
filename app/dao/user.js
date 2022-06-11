@@ -9,7 +9,8 @@ module.exports = {
      */
     create: async (body) => {
         // Create an user if email is not exist.
-        const user = await new User(body).save()
+        const newUser = new User(body)
+        const user = await newUser.save()
         return user
     },
 

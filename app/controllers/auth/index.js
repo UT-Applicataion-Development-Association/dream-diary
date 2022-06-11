@@ -49,7 +49,11 @@ const authUser = async (req, res) => {
                             email: user.email,
                             isAdmin: user.isAdmin,
                         },
-                        token: userServices.generateToken(user._id, user.email),
+                        token: userServices.generateToken(
+                            user._id,
+                            user.email,
+                            user.isAdmin
+                        ),
                     },
                 })
             )
