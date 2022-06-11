@@ -1,5 +1,5 @@
 const DreamServices = require('../../services').Dream
-const { Response } = require('../../utils/response')
+const { Response, response } = require('../../utils/response')
 
 module.exports = {
     getDreams: async (req, res) => {
@@ -72,8 +72,7 @@ module.exports = {
                 // return response
                 res.send(new Response({ entity: { removal_result } }))
             } else {
-                res.send(500).send('hehehe nice try:)')
-                return
+                res.status(403).send(response.FORBIDDEN)
             }
         } catch (err) {
             console.error(err)
@@ -124,8 +123,7 @@ module.exports = {
                 // return response
                 res.send(new Response({ entity: { updated_dream } }))
             } else {
-                res.send(500).send('hehehe nice try:)')
-                return
+                res.status(403).send(response.FORBIDDEN)
             }
         } catch (err) {
             console.error(err)
