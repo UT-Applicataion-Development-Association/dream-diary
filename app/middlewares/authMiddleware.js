@@ -2,11 +2,15 @@ const jwt = require('jsonwebtoken')
 const { response } = require('../utils/response')
 const config = require('../../configs')
 
+/**
+ * Verify request has valid token.
+ * Assign { email, userId } to req.
+ */
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
     const token = authHeader.split(' ')[1]
     if (!token) {
-        console.log('No token found, not authorized')
+        console.log('Unauthorized request without token')
         res.status(401).send(response.UNAUTHORIZED)
         return
     }
@@ -14,8 +18,6 @@ function authenticateToken(req, res, next) {
         const decodedInfo = jwt.verify(token, config.secretKey)
         req.email = decodedInfo.email
         req.userId = decodedInfo.userId
-
-        console.log('authenticated')
         next()
     } catch (error) {
         res.status(401).send(response.UNAUTHORIZED + error.message)

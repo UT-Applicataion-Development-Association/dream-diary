@@ -3,11 +3,12 @@ const router = new express.Router()
 
 const dreamController = require('../../controllers').dream
 const { mongoChecker } = require('../../middlewares')
-const authChecker =
-    require('../../middlewares/authMiddleware').authenticateToken
+const {
+    authenticateToken: authChecker,
+} = require('../../middlewares/authMiddleware')
 
 /**
- * Get all dreams for home page.
+ * Get all dreams.
  */
 router.get(
     '/dreams',
@@ -17,6 +18,9 @@ router.get(
     dreamController.getDreams
 )
 
+/**
+ * Get dreams of a specific user.
+ */
 router.get(
     '/user/:user_id/dreams',
     // Middlewares
@@ -26,7 +30,9 @@ router.get(
     dreamController.getDreams
 )
 
-// get a specific dream
+/**
+ * Get a specific dream
+ */
 router.get(
     '/dreams/:dream_id',
     // Middlewares
@@ -36,24 +42,28 @@ router.get(
     dreamController.getDream
 )
 
-router.post(
-    '/user/:user_id/dreams',
-    mongoChecker,
-    //authChecker,
-    dreamController.createDream
-)
+/**
+ * Create a dream.
+ */
+router.post('/dreams', mongoChecker, authChecker, dreamController.createDream)
 
+/**
+ * Delete a dream.
+ */
 router.delete(
-    '/user/:user_id/dreams/:dream_id',
+    '/dreams/:dream_id',
     mongoChecker,
     authChecker,
     dreamController.deleteDream
 )
 
+/**
+ * Update a dream.
+ */
 router.put(
-    '/user/:user_id/dreams/:dream_id',
+    '/dreams/:dream_id',
     mongoChecker,
-    //authChecker,
+    authChecker,
     dreamController.updateDream
 )
 

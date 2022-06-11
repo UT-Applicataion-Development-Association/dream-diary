@@ -1,92 +1,116 @@
-const UserServices = require("../../services").User
-const { Response } = require("../../utils/response")
-const generateToken = require("../../utils/generateToken").generateToken
+const mongoose = require('mongoose')
 
-const registerUser = async(req,res) => {
-    try{
-        const {name, password,email} = req.body;
-        if(!(name && password && email)){
-            throw new Error('All input is needed')
-        }
-        // TODO: add vailidation for email&password format
-        const userServices = new UserServices();
+const UserServices = require('../../services').User
+const { Response, response } = require('../../utils/response')
 
-        const userExists = await userServices.getUser({email});
+const registerUser = async (req, res) => {
+    const { name, password, email } = req.body
 
-        if(userExists) {
-            //TODO ： change status code to 400 for this error in catch
-            throw new Error('There is existing user using this email')
-        }
-        
-        const user = await userServices.createUser(name,password,email)
+    if (!(name && password && email)) {
+        res.status(400).send(response.NOT_SATISFIED)
+        return
+    }
+
+    // TODO: Add vailidation for email&password format
+    const userServices = new UserServices()
+
+    try {
+        const user = await userServices.createUser({ name, password, email })
 
         res.status(201).json({
-                _id:user.id,
-                name:user.name,
-                email: user.email,
-                isAdmin: user.isAdmin,
-        }) //TODO: add another check for user creation? Any case where creation failed but
-        // no error returned?
-    } 
-    catch (err) {
+            _id: user.id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+        })
+    } catch (err) {
+        // TODO:
+        // If MongoError
+        // If unique email is violated
+        // Else
         console.error(err)
-        res.status(500).send(new Response({ msg: err.message, status: 500 }));
+        res.status(500).send(new Response({ msg: err.message, status: 500 }))
     }
-};
+}
 
-const authUser = async(req,res) => {
-    try{
-        const {email, password} = req.body;
-        const userServices = new UserServices();
+const authUser = async (req, res) => {
+    try {
+        const { email, password } = req.body
+        const userServices = new UserServices()
 
-        const user = await userServices.getUser({email});
-        if(user && (await user.matchPassword(password))){
-            res.status(201).json({
-                _id:user.id,
-                name:user.name,
-                email: user.email,
-                isAdmin: user.isAdmin,
-                token: generateToken(user._id,user.email)
-            })
+        const user = await userServices.getUserByEmail(email)
+        if (user && (await user.matchPassword(password))) {
+            res.send(
+                new Response({
+                    entity: {
+                        user: {
+                            _id: user._id,
+                            name: user.name,
+                            email: user.email,
+                            isAdmin: user.isAdmin,
+                        },
+                        token: userServices.generateToken(user._id, user.email),
+                    },
+                })
+            )
+        } else {
+            // User not found or password doesn't match
+            res.status(404).send(response.NOT_FOUND)
         }
-        else{
-            throw new Error('Invalid email or password')
-            // TODO: split the error based on unregistered email / invalid password
-        }
-    } 
-    catch (err) {
+    } catch (err) {
         console.error(err)
-        res.status(500).send(new Response({ msg: err.message, status: 500 }));
+        res.status(500).send(new Response({ msg: err.message, status: 500 }))
     }
-};
+}
 
-const updateUser = async(req,res) => {
-    // Plase don't include email in req body
-    // Won't return error buty
-    try{
-        const userServices = new UserServices();
+const updateUser = async (req, res) => {
+    try {
+        const userServices = new UserServices()
         const email = req.email
 
-        const updatedUser = await userServices.updateUser({email},req.body)
-        if(updatedUser){
-            res.status(201).json({
-                _id:updatedUser.id,
-                name:updatedUser.name,
-                email: updatedUser.email,
-                isAdmin: updatedUser.isAdmin,
-            }) 
-        }
-        else{
-            throw new Error('Error occured when updating user');
-            //TODO: split error status code.
+        const { _id, name } = req.body
+        const updateBody = { _id, name }
+
+        if (!mongoose.isValidObjectId(_id)) {
+            res.status(400).send(
+                new Response({ status: 400, msg: 'Invalid _id' })
+            )
+            return
         }
 
-    } 
-    catch (err) {
+        const updatedUser = await userServices.updateUser(_id, updateBody)
+        if (updatedUser) {
+            res.send(
+                new Response({
+                    entity: {
+                        user: {
+                            _id: updatedUser._id,
+                            name: updatedUser.name,
+                            email: updatedUser.email,
+                            isAdmin: updatedUser.isAdmin,
+                        },
+                    },
+                })
+            )
+        } else {
+            res.status(404).send(response.NOT_FOUND)
+        }
+    } catch (err) {
         console.error(err)
-        res.status(500).send(new Response({ msg: err.message, status: 500 }));
+        // TODO:
+        // If MongoError
+        // If user not found
+        // Else
+        res.status(500).send(new Response({ msg: err.message, status: 500 }))
     }
-};
+}
 
+const getUser = async (req, res) => {
+    // TODO:
+}
 
-module.exports = {registerUser, authUser, updateUser};
+const deleteUser = async (req, res) => {
+    // TODO:
+}
+
+module.exports = { registerUser, authUser, updateUser }

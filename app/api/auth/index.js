@@ -1,14 +1,16 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 const authController = require('../../controllers').auth
 const { mongoChecker } = require('../../middlewares')
-const authChecker  = require('../../middlewares/authMiddleware').authenticateToken
+const {
+    authenticateToken: authChecker,
+} = require('../../middlewares/authMiddleware')
 
 /**
  * Register an user
-*/
+ */
 router.post(
-    "/register",
+    '/register',
     // Middlewares
     mongoChecker,
     // Controller
@@ -17,9 +19,9 @@ router.post(
 
 /**
  * Authenticate an user
-*/
+ */
 router.post(
-    "/login",
+    '/login',
     // Middlewares
     mongoChecker,
     // Controller
@@ -27,10 +29,10 @@ router.post(
 )
 
 /**
- * Update an user info 
-*/
+ * Update an user info
+ */
 router.put(
-    "/update",
+    '/update',
     // Middlewares
     mongoChecker,
     authChecker,
@@ -50,4 +52,4 @@ router.put(
 //     authController.updateUserPassword
 // )
 
-module.exports = router;
+module.exports = router

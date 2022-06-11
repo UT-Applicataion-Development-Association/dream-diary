@@ -5,7 +5,7 @@ module.exports = {
     getDreams: async (req, res) => {
         try {
             // Get request data
-            const pagination = req.query.pagination
+            const pagination = req.query?.pagination || 0
 
             // Get dreams from services
             const dreamServices = new DreamServices()
