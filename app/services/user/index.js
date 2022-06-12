@@ -11,6 +11,10 @@ class UserServices {
     }
 
     async createUser({ name, password, email }) {
+        const checkExist = await userDao.retrieveByEmail(email)
+        if (checkExist) {
+            throw new Error('User already exists')
+        }
         const user = await userDao.create({
             name,
             password,

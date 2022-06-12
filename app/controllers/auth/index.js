@@ -11,18 +11,22 @@ const registerUser = async (req, res) => {
         return
     }
 
-    // TODO: Add vailidation for email&password format
+    // TODO: Add validation for email&password format
     const userServices = new UserServices()
 
     try {
         const user = await userServices.createUser({ name, password, email })
 
-        res.status(201).json({
-            _id: user.id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin,
-        })
+        res.status(201).send(
+            new Response({
+                entity: {
+                    _id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    isAdmin: user.isAdmin,
+                },
+            })
+        )
     } catch (err) {
         // TODO:
         // If MongoError
