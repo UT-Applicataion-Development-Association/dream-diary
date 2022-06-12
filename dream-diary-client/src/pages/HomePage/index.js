@@ -1,84 +1,62 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import NewButton from "../assets/new_dream.svg";
-import Dream4 from "../assets/dream4.svg";
-import NavBar from "../../components/NavBar/index";
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
-import "./home-page.scss";
+import NavBar from 'components/UI/NavBar'
+import Footer from 'components/UI/Footer'
 
-const placeholders = [
-  { img: Dream4 },
-  { img: Dream4 },
-  { img: Dream4 },
-  { img: Dream4 },
-  { img: Dream4 },
-  { img: Dream4 },
-  { img: Dream4 },
-  { img: Dream4 },
-  { img: Dream4 },
-  { img: Dream4 },
-];
+import './home-page.scss'
+import { useContext } from 'react'
+import UserContext from 'stores/UserContext'
 
-// const API_HOST = ENV.api_host
-// const getDreamList = () => {
-//   const request =  new Request(`/dreams`,{
-//       method: "get"
-//   })
+import { mockDreams } from 'assets/mock/dreams'
 
-//   fetch(request)
-//   .then(data => {return data.json()})
-//   .then(res => {})
-//   .catch(error => {
-//       console.log(error);
-//   });
-// }
-
-class HomePage extends React.Component {
-  render() {
-    return (
-      <div className="page home-page">
-        <NavBar title={"梦 境 墙"} />
-        <main className="home-main">
-          {/* <div>
-            <Link to="/dream/3">Link to ViewDream</Link>
-          </div> */}
-          <DreamFeed />
-        </main>
-        <Footer />
+const DreamItem = ({ dream }) => {
+  return (
+    <Link to={`/dream/${dream._id}`}>
+      <div className="dream-item">
+        <img src={dream.image} alt="dream-cover" className="dream-img" />
       </div>
-    );
-  }
+    </Link>
+  )
 }
 
-// const NavBar = () => {
-//   return (
-//     <section className="home-nav">
-//       <span className="nav-text">梦 境 墙</span>
-//       <img src={Toggle} alt="toggle-menu" className="toggle-menu" />
-//     </section>
-//   );
-// };
-
-const Footer = () => {
-  return (
-    <section className="home-footer">
-      <img src={NewButton} alt="new-button" className="new-button" />
-    </section>
-  );
-};
-
-const DreamFeed = () => {
+const DreamFeed = React.memo(({ dreams }) => {
   return (
     <section className="dream-feed">
-      {placeholders.map((dream) => {
-        return <Dream dream={dream}></Dream>;
+      {dreams.map((dream) => {
+        return <DreamItem key={dream._id} dream={dream}></DreamItem>
       })}
     </section>
-  );
-};
+  )
+})
 
-const Dream = (props) => {
-  return <img src={props.dream.img} alt="dream-cover" className="dream" />;
-};
+const HomePage = () => {
+  const userCtx = useContext(UserContext)
+  console.log('Login as', userCtx)
 
-export default HomePage;
+  const [dreamLists, setDreamLists] = useState([])
+
+  useEffect(() => {
+    // Load Dreams from server
+
+    return () => {
+      // Clean up
+    }
+  }, [])
+
+  return (
+    <div className="page home-page">
+      <NavBar title={'梦境墙'} />
+      <main className="home-main">
+        {dreamLists.map((dreamList, i) => (
+          <DreamFeed key={i} dreams={dreamList} />
+        ))}
+
+        <DreamFeed dreams={mockDreams} />
+      </main>
+      <Footer addButton />
+    </div>
+  )
+}
+
+export default HomePage

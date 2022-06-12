@@ -1,18 +1,19 @@
-import React from "react";
-import { BrowserRouter } from 'react-router-dom';
-import RenderRoutes from "./routes";
+import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import RenderRoutes from './routes'
+import { UserProvider } from 'stores/UserContext'
 
-import "styles/App.scss";
-import "styles/universal.scss";
+import 'styles/App.scss'
+import 'styles/universal.scss'
 
-class App extends React.Component {
-  render() {
-    return (
+const App = () => {
+  return (
+    <UserProvider>
       <BrowserRouter>
         <RenderRoutes />
       </BrowserRouter>
-    );
-  }
+    </UserProvider>
+  )
 }
 
-export default App;
+export default App

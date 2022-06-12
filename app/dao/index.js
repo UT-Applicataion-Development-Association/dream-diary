@@ -1,4 +1,4 @@
 module.exports = {
     dreamDao: require('./dream'),
-    userDao: require('./user')
+    userDao: require('./user'),
 }

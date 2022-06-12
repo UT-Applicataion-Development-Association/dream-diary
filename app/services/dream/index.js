@@ -3,42 +3,42 @@ const { dreamDao } = require('../../dao')
 class DreamServices {
     /**
      * Get all dreams.
-     * @param {Number} pagination 
-     * @returns 
+     * @param {Number} params
+     * @return {any}
      */
     async getDreams(params = { pagination: 1 }) {
         // Log
-        console.log("Get dreams by", params)
+        console.log('Get dreams by', params)
 
-        const dreams = await dreamDao.find(params) || []
+        const dreams = (await dreamDao.find(params)) || []
         return dreams
     }
 
-    async createDream(title, dreamer, content, tags, image) {
+    async createDream(title, author, content, tags, image) {
         const dream = await dreamDao.create({
             title,
-            dreamer,
+            author,
             content,
             tags,
-            image
+            image,
         })
 
         return dream
     }
 
     async getDream(id) {
-        const dream =  await dreamDao.retrieve(id)
+        const dream = await dreamDao.retrieve(id)
         return dream
     }
 
     async updateDream(id, updates) {
-        const updated_dream = await dreamDao.update(id, updates)
-        return updated_dream
+        const updatedDream = await dreamDao.update(id, updates)
+        return updatedDream
     }
 
     async deleteDream(id) {
-        const removal_result = await dreamDao.delete(id)
-        return removal_result
+        const removalResult = await dreamDao.delete(id)
+        return removalResult
     }
 }
 

@@ -2,7 +2,7 @@
 const mongoose = require('mongoose')
 
 /**
- * 
+ *
 - Content
 - Date (input, has default to today)
 - Optional title
@@ -16,9 +16,9 @@ const mongoose = require('mongoose')
 const Dream = mongoose.model('Dream', {
     title: {
         type: String,
-        trim: true
+        trim: true,
     },
-    dreamer: {
+    author: {
         type: mongoose.Schema.Types.ObjectId,
         // required: true
     },
@@ -27,13 +27,13 @@ const Dream = mongoose.model('Dream', {
     },
     date: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
     tags: [String],
     image: {
         type: String,
-        default: "",
-    }
+        default: '',
+    },
 })
 
 module.exports = Dream
