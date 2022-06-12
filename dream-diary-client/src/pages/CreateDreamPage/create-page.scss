@@ -1,0 +1,63 @@
+@import '../../styles/global_vars';
+
+.create-dream-page {
+  .form {
+    min-height: 70vh;
+    @include px(2rem);
+
+    .dream-date {
+      width: 40%;
+      background-color: $bg-color;
+      color: #ffffff;
+
+      font-size: 20px;
+      @include px(15px);
+      @include py(10px);
+
+      border-radius: 0px 10px 0px 0px;
+      border: none;
+      outline: none;
+    }
+
+    .text-container {
+      $container-padding: 16px;
+      border: 1px solid #22223b;
+      border-radius: 0px 10px 10px 10px;
+      width: 100%;
+      padding-bottom: $container-padding;
+
+      input,
+      textarea {
+        width: calc(
+          100% - 20px - #{$container-padding} - #{$container-padding}
+        );
+        @include mx($container-padding);
+
+        font-size: 20px;
+        border: none;
+        outline: none;
+        padding: 10px 10px;
+      }
+
+      input {
+        background-color: transparent;
+      }
+
+      textarea {
+        height: 400px;
+        border-radius: 0px 10px 10px 10px;
+        background-color: #f8f8f8aa;
+        resize: none;
+      }
+    }
+
+    .create-dream-footer {
+      @include flex-display;
+      margin-top: 16px;
+
+      button {
+        @include button($radius: 25px);
+      }
+    }
+  }
+}

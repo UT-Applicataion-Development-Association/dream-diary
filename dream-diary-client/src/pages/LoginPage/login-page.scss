@@ -1,0 +1,18 @@
+@import '../../styles/global_vars';
+
+.login-page {
+  @include flex-display;
+
+  .login-page-title {
+    font-family: $sans-serif;
+    color: #464660;
+    margin-bottom: 1.5em;
+    font-size: 2.5rem;
+  }
+
+  .link-to-signup {
+    margin-top: 20px;
+    color: #464660;
+    opacity: 0.75;
+  }
+}

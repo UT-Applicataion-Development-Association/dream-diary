@@ -6,18 +6,18 @@ class DreamServices {
      * @param {Number} params
      * @return {any}
      */
-    async getDreams(params = { pagination: 1 }) {
+    async getDreams(filter, pagination) {
         // Log
-        console.log('Get dreams by', params)
+        console.log('Get dreams by', filter, pagination)
 
-        const dreams = (await dreamDao.find(params)) || []
+        const dreams = (await dreamDao.find(filter, pagination)) || []
         return dreams
     }
 
-    async createDream(title, dreamer, content, tags, image) {
+    async createDream({ title, author, content, tags, image }) {
         const dream = await dreamDao.create({
             title,
-            dreamer,
+            author,
             content,
             tags,
             image,

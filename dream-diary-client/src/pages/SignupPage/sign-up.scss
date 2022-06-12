@@ -1,0 +1,17 @@
+@import '../../styles/global_vars';
+
+.signup-page {
+  @include flex-display;
+
+  .signup-page-title {
+    color: $bg-color;
+    margin-bottom: 1.5em;
+    font-size: 2.5rem;
+  }
+
+  .link-to-login {
+    margin-top: 20px;
+    color: $bg-color;
+    opacity: 0.75;
+  }
+}

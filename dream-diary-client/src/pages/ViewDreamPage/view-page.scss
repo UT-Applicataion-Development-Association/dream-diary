@@ -1,0 +1,25 @@
+@import '../../styles/global_vars';
+
+.view-dream-page {
+  .dream-body {
+    margin: 1rem;
+    @include flex-display($jc: flex-start);
+
+    .dream-image {
+      max-height: 300px;
+      max-width: 80%;
+    }
+
+    .dream-date {
+      @include my(0.8rem);
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      color: $bg-color;
+    }
+
+    .dream-content {
+      color: $bg-dark;
+      width: 75%;
+    }
+  }
+}

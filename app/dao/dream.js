@@ -44,7 +44,7 @@ module.exports = {
      * @return {any} The deleted dream.
      */
     delete: async (id) => {
-        const dream = await Dream.findByIdAndDelete(id).exec()
+        const dream = await Dream.findByIdAndRemove(id).exec()
         return dream
     },
 
@@ -53,9 +53,18 @@ module.exports = {
      * @param {Object} filter
      * @return {[any]} Array of Dreams.
      */
-    find: async (filter) => {
+    find: async (
+        filter = {},
+        pagination = {
+            page: 0,
+            limit: 10,
+        }
+    ) => {
         // Query by filter
-        const dreams = await Dream.find(filter).exec()
+        const dreams = await Dream.find(filter)
+            .limit(pagination.limit * 1)
+            .skip(pagination.page * pagination.limit)
+            .exec()
         return dreams
     },
 }

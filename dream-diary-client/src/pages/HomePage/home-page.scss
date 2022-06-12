@@ -1,18 +1,24 @@
-@import "../../styles/global_vars";
+@import '../../styles/global_vars';
 
 .home-page {
-    background-color: $light;
-    @include flex-display($jc: flex-start);
-}
+  .home-main {
+    width: 100%;
+    height: calc(100vh - #{$navbar-height} - #{$footer-height});
+    @include flex-display($jc: 'flex-start');
+    overflow-y: scroll;
 
-.home-nav {
-    @include flex-display;
-    height: 5rem;
-}
+    .dream-feed {
+      display: grid;
+      column-count: 2;
+      grid-template-columns: 50% 50%;
 
-.home-main {
-    width: 100vw;
-    min-height: 50vh;
-    background: linear-gradient(to right, #e55d8750, #5fc3e450);
-    @include flex-display($jc: flex-start);
+      margin: 0;
+    }
+
+    .dream {
+      display: inline-block;
+      width: 100%;
+      height: auto;
+    }
+  }
 }
