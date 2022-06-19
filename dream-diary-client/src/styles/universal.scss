@@ -5,3 +5,15 @@
   width: 100vw;
   @include gradient-bg;
 }
+
+.error {
+  color: $error;
+}
+
+.success {
+  color: $success;
+}
+
+.warning {
+  color: $warning;
+}

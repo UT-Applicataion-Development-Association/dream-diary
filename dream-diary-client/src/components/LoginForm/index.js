@@ -26,7 +26,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [errorMsg, setErrorMsg] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -37,7 +37,7 @@ const LoginForm = () => {
         userCtx.dispatch({ type: 'SET', state: loginInfo })
         navigate('/')
       } else {
-        setErrorMsg('Invalid email or password')
+        setError('Invalid email or password')
       }
     } catch (err) {
       alert(err)
@@ -62,7 +62,7 @@ const LoginForm = () => {
         className="login-form-input"
         onChange={(e) => setPassword(e.target.value)}
       />
-      {errorMsg && <div className="error-message">{errorMsg}</div>}
+      {error && <div className="error error-message">{error}</div>}
       <button type="submit" className="submit-btn">
         登录
       </button>

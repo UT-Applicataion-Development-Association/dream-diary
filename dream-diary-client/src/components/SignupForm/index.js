@@ -1,4 +1,7 @@
+import useFetch from 'hooks/useFetch'
 import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './SignupForm.scss'
 
 const SignupForm = () => {
@@ -6,9 +9,25 @@ const SignupForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const navigate = useNavigate()
+
+  const { error, loading, data, callFetch } = useFetch(
+    {
+      route: '/auth/register',
+      method: 'post',
+    },
+    () => navigate('/login')
+  )
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    // TODO: handle submit yup
+    callFetch({
+      body: {
+        name: username,
+        email,
+        password,
+      },
+    })
   }
 
   return (
@@ -37,6 +56,7 @@ const SignupForm = () => {
         className="signup-form-input"
         onChange={(e) => setPassword(e.target.value)}
       />
+      {error && <div className="error error-message">{error}</div>}
       <button type="submit" className="submit-btn">
         注册
       </button>

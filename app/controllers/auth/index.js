@@ -31,9 +31,21 @@ const registerUser = async (req, res) => {
         // TODO:
         // If MongoError
         // If unique email is violated
-        // Else
-        console.error(err)
-        res.status(500).send(new Response({ msg: err.message, status: 500 }))
+        if (err.message === 'User already exists') {
+            res.status(400).send(
+                new Response({ msg: err.message, status: 400 })
+            )
+        } else if (err instanceof mongoose.Error.ValidationError) {
+            res.status(400).send(
+                new Response({ msg: 'Invalid inputs', status: 400 })
+            )
+        } else {
+            // Else
+            console.error(err)
+            res.status(500).send(
+                new Response({ msg: err.message, status: 500 })
+            )
+        }
     }
 }
 
