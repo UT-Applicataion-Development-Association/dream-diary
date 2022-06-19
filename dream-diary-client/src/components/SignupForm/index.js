@@ -22,9 +22,11 @@ const SignupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     callFetch({
-      name: username,
-      email,
-      password,
+      body: {
+        name: username,
+        email,
+        password,
+      },
     })
   }
 

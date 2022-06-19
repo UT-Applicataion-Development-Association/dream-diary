@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import NavBar from 'components/UI/NavBar'
 import Footer from 'components/UI/Footer'
 
 import './home-page.scss'
-import { useContext } from 'react'
 import UserContext from 'stores/UserContext'
 
 import { mockDreams } from 'assets/mock/dreams'

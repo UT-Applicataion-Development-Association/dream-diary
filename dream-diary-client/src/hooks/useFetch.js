@@ -3,12 +3,9 @@ import UserContext from 'stores/UserContext'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:5000/api'
 
-const useFetch = (
-  { route, params, method = 'get', initialData = null },
-  callback
-) => {
+const useFetch = ({ route, method = 'get', initialData = null }, callback) => {
   const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const [data, setData] = useState(initialData)
 
@@ -17,7 +14,7 @@ const useFetch = (
   const authToken = userCtx.state.token
 
   const callFetch = useCallback(
-    async (body) => {
+    async ({ params, body }) => {
       try {
         setLoading(true)
         setError(null)
