@@ -24,8 +24,12 @@ const userReducer = (state, action) => {
   console.log('Reduce', state, action)
   switch (action.type && action.type.toUpperCase()) {
     case 'SET':
+      localStorage.setItem('user', JSON.stringify(action.state.user))
+      localStorage.setItem('token', JSON.stringify(action.state.token))
       return action.state
     case 'CLEAR':
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
       return {
         user: null,
         token: null,
@@ -37,8 +41,8 @@ const userReducer = (state, action) => {
 
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(userReducer, {
-    user: null,
-    token: null,
+    user: JSON.parse(localStorage.getItem('user')),
+    token: localStorage.getItem('token'),
   })
 
   return (
