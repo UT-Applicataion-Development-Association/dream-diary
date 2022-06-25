@@ -1,47 +1,45 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import useFetch from 'hooks/useFetch'
 import UserContext from 'stores/UserContext'
 import { randomToken } from 'utils/random'
 import './LoginForm.scss'
 
-const loginUser = async (email, password) => {
-  // TODO: submit to backend
-  const _id = randomToken()
-  const username = 'Test User'
-  const token = randomToken()
+// const loginUser = async (email, password) => {
+//   // TODO: submit to backend
+//   const _id = randomToken()
+//   const username = 'Test User'
+//   const token = randomToken()
 
-  if (email !== 'test@test.com') {
-    return null
-  }
+//   if (email !== 'test@test.com') {
+//     return null
+//   }
 
-  return { user: { _id, email, username }, token }
-}
+//   return { user: { _id, email, username }, token }
+// }
 
 const LoginForm = () => {
   const navigate = useNavigate()
 
-  const userCtx = useContext(UserContext)
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [error, setError] = useState('')
+  const { error, loading, data, callFetch } = useFetch(
+    {
+      route: '/auth/login',
+      method: 'post',
+    },
+    () => navigate('/')
+  )
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    try {
-      const loginInfo = await loginUser(email, password)
-      if (loginInfo) {
-        userCtx.dispatch({ type: 'SET', state: loginInfo })
-        navigate('/')
-      } else {
-        setError('Invalid email or password')
-      }
-    } catch (err) {
-      alert(err)
-    }
+    callFetch({
+      body: {
+        email,
+        password,
+      },
+    })
   }
 
   return (
