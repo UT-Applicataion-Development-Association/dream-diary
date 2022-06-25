@@ -4,12 +4,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 /**
+ * author - id of the author
  * Title - name of the collection
- * Save - Lists of dreams
+ * ofDream - Lists of dreams
  * CreatedAt
  * UpdatedAt
  */
 const SaveSchema = new Schema({
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
     title: {
         type: String,
         required: true
