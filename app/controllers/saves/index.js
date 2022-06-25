@@ -83,6 +83,14 @@ module.exports = {
                 String(targetSave.author) === req.user._id ||
                 req.user.isAdmin
             ) {
+                // Check if the title is already used on other saves by
+                // the same author.
+                const titleExist = await savesServices.getSaveByTitle(title)
+                if ( titleExist !== targetSave && titleExist.author === req.user._id) {
+                    res.send(new Response({ status: 400, msg: 'Title already used'}))
+                    return
+                }
+
                 const updatedSave = await savesServices.updateSave(
                     _id, 
                     updateBody
