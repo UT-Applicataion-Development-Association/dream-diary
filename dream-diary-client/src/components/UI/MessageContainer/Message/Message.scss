@@ -1,0 +1,27 @@
+@import '../../../../styles/global_vars';
+
+.message-box {
+  @include px(1.2rem);
+  @include py(0.6rem);
+  margin: 0.6rem;
+
+  background-color: white;
+  @include round-border(20px);
+  box-shadow: 0 2px 10px #00000040;
+
+  pointer-events: fill;
+
+  .message-close-btn {
+    margin-left: 1rem;
+    margin-right: 0;
+    padding-right: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+}
+
+.fade-out {
+  transition: opacity 0.5s;
+  opacity: 0;
+}
