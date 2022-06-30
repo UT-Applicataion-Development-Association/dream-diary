@@ -1,4 +1,5 @@
 import useFetch from 'hooks/useFetch'
+import useMessage from 'hooks/useMessage'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -10,13 +11,17 @@ const SignupForm = () => {
   const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
+  const message = useMessage()
 
   const { error, loading, data, callFetch } = useFetch(
     {
       route: '/auth/register',
       method: 'post',
     },
-    () => navigate('/login')
+    () => {
+      message.success('欢迎注册！')
+      navigate('/login')
+    }
   )
 
   const handleSubmit = (e) => {
@@ -29,6 +34,11 @@ const SignupForm = () => {
       },
     })
   }
+
+  // On error
+  useEffect(() => {
+    error && message.error(error)
+  }, [error])
 
   return (
     <form onSubmit={handleSubmit} className="signup-form">
@@ -56,7 +66,6 @@ const SignupForm = () => {
         className="signup-form-input"
         onChange={(e) => setPassword(e.target.value)}
       />
-      {error && <div className="error error-message">{error}</div>}
       <button type="submit" className="submit-btn">
         注册
       </button>
