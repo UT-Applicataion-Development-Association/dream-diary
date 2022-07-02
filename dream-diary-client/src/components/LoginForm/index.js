@@ -35,7 +35,7 @@ const LoginForm = () => {
       const loginInfo = await loginUser(email, password)
       if (loginInfo) {
         userCtx.dispatch({ type: 'SET', state: loginInfo })
-        navigate('/home')
+        navigate('/')
       } else {
         setErrorMsg('Invalid email or password')
       }

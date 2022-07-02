@@ -4,14 +4,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 /**
- * author - id of the author
+ * User - id of the User
  * Title - name of the collection
- * ofDream - Lists of dreams
+ * dreams - Lists of dreams
  * CreatedAt
  * UpdatedAt
  */
-const SaveSchema = new Schema({
-    author: {
+const CollectionSchema = new Schema({
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
@@ -19,11 +19,11 @@ const SaveSchema = new Schema({
         type: String,
         required: true
     },
-    ofDream: {
+    dreams: {
         type: [mongoose.Schema.Types.ObjectId], // Store all Dream ObjectIDs in here.
     }
 }, { timestamps: true});
 
-const Saves = mongoose.model('Saves', SaveSchema);
+const Collection = mongoose.model('Collection', CollectionSchema);
 
-module.exports = Saves;
+module.exports = Collection;
