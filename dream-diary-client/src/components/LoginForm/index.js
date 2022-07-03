@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useFetch from 'hooks/useFetch'
 import UserContext from 'stores/UserContext'
@@ -23,6 +23,13 @@ const LoginForm = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    const auth = localStorage.getItem('user')
+    if (auth) {
+      navigate('/')
+    }
+  })
 
   const { error, loading, data, callFetch } = useFetch(
     {
