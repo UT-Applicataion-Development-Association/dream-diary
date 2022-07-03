@@ -8,6 +8,7 @@ import './home-page.scss'
 import UserContext from 'stores/UserContext'
 
 import { mockDreams } from 'assets/mock/dreams'
+import useDocumentTitle from 'hooks/useDocumentTitle'
 
 const DreamItem = ({ dream }) => {
   return (

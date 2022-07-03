@@ -7,6 +7,7 @@ import NavBar from 'components/UI/NavBar'
 import './view-page.scss'
 import { mockDream } from 'assets/mock/dreams'
 import useFetch from 'hooks/useFetch'
+import useDocumentTitle from 'hooks/useDocumentTitle'
 
 const DreamBody = ({ params, dream }) => {
   return (
@@ -27,14 +28,16 @@ const DreamBody = ({ params, dream }) => {
 const ViewDreamPage = (props) => {
   const params = useParams()
 
-  useEffect(() => {
-    // Get dream from server by params.id
-  }, [params])
+  const { data, loading, error, callFetch } = useFetch({
+    route: `/dream/${params.id}`,
+  })
+
+  useDocumentTitle(data?.title)
 
   return (
     <div className="page view-dream-page">
-      <NavBar title={'梦境名称'} back />
-      <DreamBody params={params} dream={mockDream} />
+      <NavBar title={data?.title || ''} back />
+      <DreamBody params={params} dream={data || mockDream} />
     </div>
   )
 }
