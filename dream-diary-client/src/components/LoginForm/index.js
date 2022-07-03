@@ -29,7 +29,7 @@ const LoginForm = () => {
     if (auth) {
       navigate('/')
     }
-  })
+  }, [])
 
   const { error, loading, data, callFetch } = useFetch(
     {
