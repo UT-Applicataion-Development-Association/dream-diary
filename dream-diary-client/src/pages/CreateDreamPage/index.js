@@ -5,8 +5,11 @@ import NavBar from 'components/UI/NavBar'
 import UserContext from 'stores/UserContext'
 
 import './create-page.scss'
+import useDocumentTitle from 'hooks/useDocumentTitle'
 
 const DreamEditor = () => {
+  useDocumentTitle('New Dream')
+
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
