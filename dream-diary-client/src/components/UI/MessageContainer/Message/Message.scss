@@ -22,6 +22,24 @@
 }
 
 .fade-out {
-  transition: opacity 0.5s;
-  opacity: 0;
+  animation: fadeOut 0.5s linear forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  90% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 0;
+    display: none;
+    pointer-events: none;
+  }
 }
