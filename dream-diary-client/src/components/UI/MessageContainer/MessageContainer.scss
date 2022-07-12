@@ -1,0 +1,12 @@
+@import '../../../styles/global_vars';
+
+.message-container {
+  width: 100vw;
+  height: 0;
+  position: fixed;
+  bottom: 120px;
+  @include flex-display($dir: column, $jc: flex-end);
+
+  z-index: 999;
+  pointer-events: none;
+}

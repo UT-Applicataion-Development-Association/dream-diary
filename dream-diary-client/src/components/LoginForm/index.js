@@ -1,3 +1,4 @@
+import useMessage from 'hooks/useMessage'
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -20,6 +21,7 @@ const loginUser = async (email, password) => {
 
 const LoginForm = () => {
   const navigate = useNavigate()
+  const message = useMessage()
 
   const userCtx = useContext(UserContext)
 
@@ -37,7 +39,7 @@ const LoginForm = () => {
         userCtx.dispatch({ type: 'SET', state: loginInfo })
         navigate('/')
       } else {
-        setError('Invalid email or password')
+        message.error('Invalid email or password')
       }
     } catch (err) {
       alert(err)

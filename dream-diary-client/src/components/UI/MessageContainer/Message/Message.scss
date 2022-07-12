@@ -1,0 +1,45 @@
+@import '../../../../styles/global_vars';
+
+.message-box {
+  @include px(1.2rem);
+  @include py(0.6rem);
+  margin: 0.6rem;
+
+  background-color: white;
+  @include round-border(20px);
+  box-shadow: 0 2px 10px #00000040;
+
+  pointer-events: fill;
+
+  .message-close-btn {
+    margin-left: 1rem;
+    margin-right: 0;
+    padding-right: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s linear forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  90% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 0;
+    display: none;
+    pointer-events: none;
+  }
+}

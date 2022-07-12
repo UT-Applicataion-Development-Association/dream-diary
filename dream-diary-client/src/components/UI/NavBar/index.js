@@ -33,7 +33,7 @@ const NavBar = ({ title, back }) => {
   }, [])
 
   return (
-    <navbar className="nav">
+    <div className="nav">
       {back && <BackButton />}
       <h1 className="nav-text nav-left">{title}</h1>
       {userCtx.state.token ? (
@@ -55,7 +55,7 @@ const NavBar = ({ title, back }) => {
           <button className="button">登录</button>
         </Link>
       )}
-    </navbar>
+    </div>
   )
 }
 

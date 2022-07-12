@@ -1,9 +1,11 @@
+import useDocumentTitle from 'hooks/useDocumentTitle'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import SignupForm from '../../components/SignupForm'
 import './sign-up.scss'
 
 const SignupPage = () => {
+  useDocumentTitle('Sign up')
   return (
     <div className="page signup-page">
       <div className="signup-page-title">欢迎注册</div>
