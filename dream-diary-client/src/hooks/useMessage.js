@@ -1,5 +1,6 @@
 import React, { useContext, useCallback } from 'react'
 import MessageContext from 'stores/MessageContext'
+import { randomToken } from 'utils/random'
 
 const useMessage = (duration = 2000) => {
   const msgCtx = useContext(MessageContext)
@@ -9,6 +10,7 @@ const useMessage = (duration = 2000) => {
       msgCtx.dispatch({
         type: 'PUSH',
         state: {
+          id: randomToken(),
           level,
           content,
           duration,

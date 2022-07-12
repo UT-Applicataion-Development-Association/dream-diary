@@ -11,10 +11,9 @@ const messageContainerRoot = document.querySelector('#messageContainerRoot')
 const MessageContainer = ({ className = '' }) => {
   const msgCtx = useContext(MessageContext)
 
-  const onFadeOut = () => {
-    // FIXME: Need improvement on performance
+  const popMessage = () => (id) => {
     setTimeout(() => {
-      msgCtx.dispatch({ type: 'POP' })
+      msgCtx.dispatch({ type: 'POP', state: { id } })
     }, 1000)
   }
 
@@ -27,7 +26,7 @@ const MessageContainer = ({ className = '' }) => {
             content={msg.content}
             level={msg.level}
             duration={msg.duration || 2000}
-            onFadeOut={onFadeOut}
+            onFadeOut={popMessage(msg.id)}
           />
         )
       })}
