@@ -1,10 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const authController = require('../../controllers').auth
+const UserController = require('../../controllers/auth')
 const { mongoChecker } = require('../../middlewares')
 const {
     authenticateToken: authChecker,
 } = require('../../middlewares/authMiddleware')
+
+const userController = new UserController()
 
 /**
  * Register an user
@@ -14,7 +16,7 @@ router.post(
     // Middlewares
     mongoChecker,
     // Controller
-    authController.registerUser
+    userController.registerUser
 )
 
 /**
@@ -25,7 +27,7 @@ router.post(
     // Middlewares
     mongoChecker,
     // Controller
-    authController.authUser
+    userController.authenticateUser
 )
 
 /**
@@ -37,7 +39,7 @@ router.put(
     mongoChecker,
     authChecker,
     // Controller
-    authController.updateUser
+    userController.updateUser
 )
 
 // /**
@@ -49,7 +51,7 @@ router.put(
 //     mongoChecker,
 //     authChecker,
 //     // Controller
-//     authController.updateUserPassword
+//     userController.updateUserPassword
 // )
 
 module.exports = router

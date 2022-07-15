@@ -1,14 +1,19 @@
 const mongoose = require('mongoose')
-const DreamServices = require('../../services').Dream
+const {
+    ResourceNotFoundException,
+    AuthenticationException,
+} = require('../../models/Error')
+
+const DreamServices = require('../../services/dream')
 const { Response, response } = require('../../utils/response')
 
-module.exports = {
-    getDreams: async (req, res) => {
+class DreamController {
+    getDreams = async (req, res) => {
         try {
             // Get request data
             const filter = req.query.search
             const pagination = {
-                page: req.query.page,
+                page: req.query.page || 0,
                 limit: 10,
             }
 
@@ -22,9 +27,9 @@ module.exports = {
             console.error(err)
             res.status(500).send(new Response({ msg: err, status: 500 }))
         }
-    },
+    }
 
-    createDream: async (req, res) => {
+    createDream = async (req, res) => {
         try {
             // Get request data
             const author = req.user._id
@@ -45,9 +50,9 @@ module.exports = {
             console.error(err)
             res.status(500).send(new Response({ msg: err, status: 500 }))
         }
-    },
+    }
 
-    deleteDream: async (req, res) => {
+    deleteDream = async (req, res) => {
         const id = req.params.dream_id
         try {
             const dreamServices = new DreamServices()
@@ -71,9 +76,9 @@ module.exports = {
             console.error(err)
             res.status(500).send(new Response({ msg: err, status: 500 }))
         }
-    },
+    }
 
-    getDream: async (req, res) => {
+    getDream = async (req, res) => {
         const id = req.params.dream_id
         try {
             const dreamServices = new DreamServices()
@@ -86,11 +91,19 @@ module.exports = {
             }
         } catch (err) {
             console.error(err)
-            res.status(500).send(new Response({ msg: err, status: 500 }))
+            if (err instanceof ResourceNotFoundException) {
+                res.status(404).send(response.NOT_FOUND)
+            } else if (err instanceof AuthenticationException) {
+                res.status(401).send(response.FORBIDDEN)
+            } else {
+                res.status(500).send(
+                    new Response({ msg: err.message, status: 500 })
+                )
+            }
         }
-    },
+    }
 
-    updateDream: async (req, res) => {
+    updateDream = async (req, res) => {
         // FIXME: If a field is not provided, you will overwrite the original content
 
         const id = req.params.dream_id
@@ -132,5 +145,7 @@ module.exports = {
             console.error(err)
             res.status(500).send(new Response({ msg: err, status: 500 }))
         }
-    },
+    }
 }
+
+module.exports = DreamController

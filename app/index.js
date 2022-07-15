@@ -29,5 +29,9 @@ mongoose.set('bufferCommands', false) // don't buffer db requests if the db serv
 routes.registerRoutes(app)
 
 app.listen(config.port, () => {
-    console.log(`[${new Date().toISOString().substr(11, 8)}] 🚀 Server started on port ${config.port}.`)
+    console.log(
+        `[${new Date()
+            .toISOString()
+            .substr(11, 8)}] 🚀 Server started on port ${config.port}.`
+    )
 })
