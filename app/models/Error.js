@@ -1,92 +1,32 @@
-/**
- * A serious problem that should not try to catch.
- */
-class ServerError extends Error {
+class DreamDiaryCustomError extends Error {
     constructor(message, options) {
         super(message, options)
         this.name = this.constructor.name
     }
 }
-
-class GatewayError extends ServerError {
-    constructor(message, options) {
-        super(message, options)
-        this.name = 'GatewayError'
-    }
-}
-
-class DatabaseError extends ServerError {
-    constructor(message, options) {
-        super(message, options)
-        this.name = 'DatabaseError'
-    }
-}
+/**
+ * A serious problem that should not try to catch.
+ */
+class ServerError extends DreamDiaryCustomError {}
+class GatewayError extends ServerError {}
+class DatabaseError extends ServerError {}
 
 /**
  * A condition that might want to catch.
  */
-class ServerException extends Error {
-    constructor(message, options) {
-        super(message, options)
-        this.name = this.constructor.name
-    }
-}
+class ServerException extends DreamDiaryCustomError {}
 
-class AuthenticationException extends ServerException {
-    constructor(message, options) {
-        super(message, options)
-        this.name = 'AuthenticationException'
-    }
-}
+/****  Authentication Errors  ****/
+class AuthenticationException extends ServerException {}
+class UnauthorizedException extends AuthenticationException {}
+class TokenExpiredException extends AuthenticationException {}
+class NoPermissionException extends AuthenticationException {}
 
-class NotAuthenticatedException extends AuthenticationException {
-    constructor(message, options) {
-        super(message, options)
-        this.name = 'NotAuthenticatedException'
-    }
-}
-
-class TokenExpiredException extends AuthenticationException {
-    constructor(message, options) {
-        super(message, options)
-        this.name = 'TokenExpiredException'
-    }
-}
-
-class NoPermissionException extends AuthenticationException {
-    constructor(message, options) {
-        super(message, options)
-        this.name = 'NoPermissionException'
-    }
-}
-
-class RequirementUnfulfilledException extends ServerException {
-    constructor(message, options) {
-        super(message, options)
-        this.name = 'RequirementUnfulfilledException'
-    }
-}
-
-class UniquenessViolatedException extends ServerException {
-    constructor(message, options) {
-        super(message, options)
-        this.name = 'UniquenessViolatedException'
-    }
-}
-
-class InvalidValueException extends ServerException {
-    constructor(message, options) {
-        super(message, options)
-        this.name = 'InvalidValueException'
-    }
-}
-
-class ResourceNotFoundException extends ServerException {
-    constructor(message, options) {
-        super(message, options)
-        this.name = 'ResourceNotFoundException'
-    }
-}
+/****  Resource Errors  ****/
+class RequirementUnfulfilledException extends ServerException {}
+class UniquenessViolatedException extends ServerException {}
+class InvalidValueException extends ServerException {}
+class ResourceNotFoundException extends ServerException {}
 
 module.exports = {
     ServerError,
@@ -94,7 +34,7 @@ module.exports = {
     GatewayError,
 
     AuthenticationException,
-    NotAuthenticatedException,
+    UnauthorizedException,
     NoPermissionException,
     TokenExpiredException,
 

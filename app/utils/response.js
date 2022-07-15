@@ -55,7 +55,60 @@ const response = {
     }),
 }
 
+const error2Response = {
+    // Server errors
+    ServerError: {
+        status: StatusCodes.INTERNAL_SERVER_ERROR,
+        msg: ReasonPhrases.INTERNAL_SERVER_ERROR,
+    },
+    DatabaseError: {
+        status: StatusCodes.BAD_GATEWAY,
+        msg: 'Database error',
+    },
+    GatewayError: {
+        status: StatusCodes.BAD_GATEWAY,
+        msg: ReasonPhrases.BAD_GATEWAY,
+    },
+
+    // Authentication errors
+    AuthenticationException: {
+        status: StatusCodes.FORBIDDEN,
+        msg: ReasonPhrases.FORBIDDEN,
+    },
+    UnauthorizedException: {
+        status: StatusCodes.UNAUTHORIZED,
+        msg: ReasonPhrases.UNAUTHORIZED,
+    },
+    NoPermissionException: {
+        status: StatusCodes.FORBIDDEN,
+        msg: ReasonPhrases.FORBIDDEN,
+    },
+    TokenExpiredException: {
+        status: StatusCodes.UNAUTHORIZED,
+        msg: ReasonPhrases.UNAUTHORIZED,
+    },
+
+    // Resource errors
+    RequirementUnfulfilledException: {
+        status: StatusCodes.BAD_REQUEST,
+        msg: 'Service Requirements Not Satisfied',
+    },
+    UniquenessViolatedException: {
+        status: StatusCodes.BAD_REQUEST,
+        msg: 'Violated Unique Entries',
+    },
+    InvalidValueException: {
+        status: StatusCodes.BAD_REQUEST,
+        msg: 'Invalid Values',
+    },
+    ResourceNotFoundException: {
+        status: StatusCodes.NOT_FOUND,
+        msg: ReasonPhrases.UNAUTHORIZED,
+    },
+}
+
 module.exports = {
     Response,
     response,
+    error2Response,
 }
