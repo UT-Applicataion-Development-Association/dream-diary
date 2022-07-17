@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const _ = require('lodash')
 const {
     UniquenessViolatedException,
     RequirementUnfulfilledException,
@@ -57,7 +58,7 @@ class UserController {
                 res.send(
                     new Response({
                         entity: {
-                            user,
+                            user: _.omit(user, '_doc.password'),
                             token: userServices.generateToken(
                                 user._id,
                                 user.email,
