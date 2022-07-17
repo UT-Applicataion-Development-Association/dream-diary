@@ -22,7 +22,10 @@
 }
 
 .fade-out {
-  animation: fadeOut 0.5s linear forwards;
+  animation: fadeOut 1s linear forwards;
+  &:hover {
+    animation: none;
+  }
 }
 
 @keyframes fadeOut {

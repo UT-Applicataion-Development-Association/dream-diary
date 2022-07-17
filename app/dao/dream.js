@@ -4,7 +4,7 @@ module.exports = {
     /**
      * Add a new Dream to db.
      * @param {*} body Body of the new dream.
-     * @return {any} The created Dream.
+     * @return {Promise<any>} The created Dream.
      */
     create: async (body) => {
         // Create a new dream
@@ -18,7 +18,7 @@ module.exports = {
     /**
      * Find a Dream by id.
      * @param {*} id Id of the target dream.
-     * @return {any} The retrieved Dream.
+     * @return {Promise<any>} The retrieved Dream.
      */
     retrieve: async (id) => {
         const dream = await Dream.findById(id).exec()
@@ -29,7 +29,7 @@ module.exports = {
      * Find a Dream by id and update it according to the update arg.
      * @param {*} id Id of the target dream.
      * @param {*} body Body of the update message.
-     * @return {any} The updated Dream.
+     * @return {Promise<any>} The updated Dream.
      */
     update: async (id, body) => {
         const dream = await Dream.findByIdAndUpdate(id, body, {
@@ -41,7 +41,7 @@ module.exports = {
     /**
      * Find a Dream by id and delete it.
      * @param {*} id Id of the target dream.
-     * @return {any} The deleted dream.
+     * @return {Promise<any>} The deleted dream.
      */
     delete: async (id) => {
         const dream = await Dream.findByIdAndRemove(id).exec()
@@ -51,7 +51,7 @@ module.exports = {
     /**
      * Find an array of Dreams that satisfy the filter.
      * @param {Object} filter
-     * @return {[any]} Array of Dreams.
+     * @return {Promise<[any]>} Array of Dreams.
      */
     find: async (
         filter = {},

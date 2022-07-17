@@ -9,7 +9,7 @@ const useMessage = (duration = 2000) => {
     (level) => (content) => {
       msgCtx.dispatch({
         type: 'PUSH',
-        state: {
+        payload: {
           id: randomToken(),
           level,
           content,

@@ -1,5 +1,7 @@
 const { dreamDao } = require('../../dao')
 
+const { ResourceNotFoundException } = require('../../models/Error')
+
 class DreamServices {
     /**
      * Get all dreams.
@@ -10,8 +12,8 @@ class DreamServices {
         // Log
         console.log('Get dreams by', filter, pagination)
 
-        const dreams = (await dreamDao.find(filter, pagination)) || []
-        return dreams
+        const dreams = await dreamDao.find(filter, pagination)
+        return dreams || []
     }
 
     async createDream({ title, author, content, tags, image }) {
@@ -28,6 +30,9 @@ class DreamServices {
 
     async getDream(id) {
         const dream = await dreamDao.retrieve(id)
+        if (!dream) {
+            throw new ResourceNotFoundException(`Dream ${id} not found`)
+        }
         return dream
     }
 

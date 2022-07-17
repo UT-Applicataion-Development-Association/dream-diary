@@ -23,11 +23,20 @@ app.use(express.static(paths.staticEntry))
 
 // mongoose and mongo connection
 const { mongoose } = require('./db/mongoose')
+
 mongoose.set('bufferCommands', false) // don't buffer db requests if the db server isn't connected - minimizes http requests hanging if this is the case.
 
 // Add APIs
 routes.registerRoutes(app)
 
+// Register error handler
+const { errorHandler } = require('./middlewares/errorHandler')
+app.use(errorHandler)
+
 app.listen(config.port, () => {
-    console.log(`[${new Date().toISOString().substr(11, 8)}] 🚀 Server started on port ${config.port}.`)
+    console.log(
+        `[${new Date()
+            .toISOString()
+            .substr(11, 8)}] 🚀 Server started on port ${config.port}.`
+    )
 })

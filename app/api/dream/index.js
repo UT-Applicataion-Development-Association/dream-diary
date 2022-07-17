@@ -1,11 +1,13 @@
 const express = require('express')
 const router = new express.Router()
 
-const dreamController = require('../../controllers').dream
+const DreamController = require('../../controllers/dream')
 const { mongoChecker } = require('../../middlewares')
 const {
     authenticateToken: authChecker,
 } = require('../../middlewares/authMiddleware')
+
+const dreamController = new DreamController()
 
 /**
  * Get all dreams.

@@ -9,12 +9,12 @@ const UserSchema = mongoose.Schema(
             required: true,
             minLength: 1,
             trim: true,
-            // Assumed no need to be unique here, use email to log in
         },
         password: {
             type: String,
             required: true,
             minLength: 6,
+            select: false,
         },
         email: {
             type: String,
@@ -24,7 +24,6 @@ const UserSchema = mongoose.Schema(
             minLength: 3,
         },
         isAdmin: {
-            // Can be removed if don't need admin functionality
             type: Boolean,
             required: true,
             default: false,

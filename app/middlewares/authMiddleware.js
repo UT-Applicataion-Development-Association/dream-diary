@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const { response } = require('../utils/response')
 const config = require('../../configs')
+const { UnauthorizedException } = require('../models/Error')
 
 /**
  * Verify request has valid token.
@@ -24,7 +25,7 @@ function authenticateToken(req, res, next) {
         }
         next()
     } catch (error) {
-        res.status(401).send(response.UNAUTHORIZED + error.message)
+        next(new UnauthorizedException('Token is Invalid'))
     }
 }
 
