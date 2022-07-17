@@ -1,23 +1,9 @@
+import React, { useContext, useEffect, useState } from 'react'
 import useMessage from 'hooks/useMessage'
-import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import useFetch from 'hooks/useFetch'
 import UserContext from 'stores/UserContext'
-import { randomToken } from 'utils/random'
 import './LoginForm.scss'
-
-const loginUser = async (email, password) => {
-  // TODO: submit to backend
-  const _id = randomToken()
-  const username = 'Test User'
-  const token = randomToken()
-
-  if (email !== 'test@test.com') {
-    return null
-  }
-
-  return { user: { _id, email, username }, token }
-}
 
 const LoginForm = () => {
   const navigate = useNavigate()
@@ -28,22 +14,25 @@ const LoginForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [error, setError] = useState('')
+  const { error, loading, data, callFetch } = useFetch(
+    {
+      route: '/auth/login',
+      method: 'post',
+    },
+    (data) => {
+      userCtx.dispatch({ type: 'SET', state: data })
+      navigate('/')
+    }
+  )
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    try {
-      const loginInfo = await loginUser(email, password)
-      if (loginInfo) {
-        userCtx.dispatch({ type: 'SET', payload: loginInfo })
-        navigate('/')
-      } else {
-        message.error('Invalid email or password')
-      }
-    } catch (err) {
-      alert(err)
-    }
+    callFetch({
+      body: {
+        email,
+        password,
+      },
+    })
   }
 
   return (
@@ -65,7 +54,7 @@ const LoginForm = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       {error && <div className="error error-message">{error}</div>}
-      <button type="submit" className="submit-btn">
+      <button type="submit" className="submit-btn" disabled={loading}>
         登录
       </button>
     </form>

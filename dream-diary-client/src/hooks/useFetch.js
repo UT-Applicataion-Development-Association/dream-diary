@@ -39,7 +39,7 @@ const useFetch = ({ route, method = 'get', initialData = null }, callback) => {
         if (response.ok) {
           const responseJson = await response.json()
           setData(responseJson.entity)
-          callback && callback()
+          callback && callback(responseJson.entity)
         } else {
           try {
             const responseJson = await response.json()
