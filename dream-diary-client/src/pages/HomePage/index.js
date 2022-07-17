@@ -8,6 +8,7 @@ import './home-page.scss'
 import UserContext from 'stores/UserContext'
 
 import { mockDreams } from 'assets/mock/dreams'
+import useDocumentTitle from 'hooks/useDocumentTitle'
 
 const DreamItem = ({ dream }) => {
   return (
@@ -22,8 +23,8 @@ const DreamItem = ({ dream }) => {
 const DreamFeed = React.memo(({ dreams }) => {
   return (
     <section className="dream-feed">
-      {dreams.map((dream) => {
-        return <DreamItem key={dream._id} dream={dream}></DreamItem>
+      {dreams.map((dream, i) => {
+        return <DreamItem key={dream._id + i} dream={dream}></DreamItem>
       })}
     </section>
   )

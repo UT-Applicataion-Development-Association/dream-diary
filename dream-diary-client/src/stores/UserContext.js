@@ -17,15 +17,19 @@ UserContext.displayName = 'UserContext'
 /**
  *
  * @param {any} state Previous state
- * @param {any} action { type: 'SET' | 'CLEAR', state?: newState }
+ * @param {any} action { type: 'SET' | 'CLEAR', payload?: newState }
  * @returns newState
  */
 const userReducer = (state, action) => {
   console.log('Reduce', state, action)
   switch (action.type && action.type.toUpperCase()) {
     case 'SET':
-      return action.state
+      localStorage.setItem('user', JSON.stringify(action.payload.user))
+      localStorage.setItem('token', JSON.stringify(action.payload.token))
+      return action.payload
     case 'CLEAR':
+      localStorage.removeItem('user')
+      localStorage.removeItem('token')
       return {
         user: null,
         token: null,
@@ -37,8 +41,8 @@ const userReducer = (state, action) => {
 
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(userReducer, {
-    user: null,
-    token: null,
+    user: JSON.parse(localStorage.getItem('user')),
+    token: localStorage.getItem('token'),
   })
 
   return (

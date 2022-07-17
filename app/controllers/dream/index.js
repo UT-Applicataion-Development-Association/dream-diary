@@ -1,14 +1,20 @@
 const mongoose = require('mongoose')
-const DreamServices = require('../../services').Dream
+const {
+    ResourceNotFoundException,
+    AuthenticationException,
+    NoPermissionException,
+} = require('../../models/Error')
+
+const DreamServices = require('../../services/dream')
 const { Response, response } = require('../../utils/response')
 
-module.exports = {
-    getDreams: async (req, res) => {
+class DreamController {
+    getDreams = async (req, res, next) => {
         try {
             // Get request data
             const filter = req.query.search
             const pagination = {
-                page: req.query.page,
+                page: req.query.page >= 0 ? req.query.page : 0,
                 limit: 10,
             }
 
@@ -19,12 +25,11 @@ module.exports = {
             // Return response
             res.send(new Response({ entity: { dreams } }))
         } catch (err) {
-            console.error(err)
-            res.status(500).send(new Response({ msg: err, status: 500 }))
+            next(err)
         }
-    },
+    }
 
-    createDream: async (req, res) => {
+    createDream = async (req, res, next) => {
         try {
             // Get request data
             const author = req.user._id
@@ -42,12 +47,11 @@ module.exports = {
             // Return response
             res.send(new Response({ entity: { dream } }))
         } catch (err) {
-            console.error(err)
-            res.status(500).send(new Response({ msg: err, status: 500 }))
+            next(err)
         }
-    },
+    }
 
-    deleteDream: async (req, res) => {
+    deleteDream = async (req, res, next) => {
         const id = req.params.dream_id
         try {
             const dreamServices = new DreamServices()
@@ -61,19 +65,18 @@ module.exports = {
                 if (removedDream) {
                     res.send(new Response({ entity: { dream: removedDream } }))
                 } else {
-                    res.status(404).send(response.NOT_FOUND)
+                    throw new ResourceNotFoundException()
                 }
             } else {
                 // Not allowed to remove other's dream except for admin
-                res.status(403).send(response.FORBIDDEN)
+                throw new NoPermissionException()
             }
         } catch (err) {
-            console.error(err)
-            res.status(500).send(new Response({ msg: err, status: 500 }))
+            next(err)
         }
-    },
+    }
 
-    getDream: async (req, res) => {
+    getDream = async (req, res, next) => {
         const id = req.params.dream_id
         try {
             const dreamServices = new DreamServices()
@@ -82,15 +85,14 @@ module.exports = {
             if (dream) {
                 res.send(new Response({ entity: { dream } }))
             } else {
-                res.status(404).send(response.NOT_FOUND)
+                throw new ResourceNotFoundException()
             }
         } catch (err) {
-            console.error(err)
-            res.status(500).send(new Response({ msg: err, status: 500 }))
+            next(err)
         }
-    },
+    }
 
-    updateDream: async (req, res) => {
+    updateDream = async (req, res, next) => {
         // FIXME: If a field is not provided, you will overwrite the original content
 
         const id = req.params.dream_id
@@ -123,14 +125,15 @@ module.exports = {
                 if (updatedDream) {
                     res.send(new Response({ entity: { dream: updatedDream } }))
                 } else {
-                    res.status(404).send(response.NOT_FOUND)
+                    throw new ResourceNotFoundException()
                 }
             } else {
-                res.status(403).send(response.FORBIDDEN)
+                throw new NoPermissionException()
             }
         } catch (err) {
-            console.error(err)
-            res.status(500).send(new Response({ msg: err, status: 500 }))
+            next(err)
         }
-    },
+    }
 }
+
+module.exports = DreamController

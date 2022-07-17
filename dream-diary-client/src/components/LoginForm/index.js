@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import useMessage from 'hooks/useMessage'
 import { useNavigate } from 'react-router-dom'
 import useFetch from 'hooks/useFetch'
 import UserContext from 'stores/UserContext'
@@ -6,6 +7,8 @@ import './LoginForm.scss'
 
 const LoginForm = () => {
   const navigate = useNavigate()
+  const message = useMessage()
+
   const userCtx = useContext(UserContext)
 
   const [email, setEmail] = useState('')

@@ -45,13 +45,13 @@ const useFetch = ({ route, method = 'get', initialData = null }, callback) => {
             const responseJson = await response.json()
             setError(responseJson.msg)
           } catch (err) {
-            throw new Error('Server response with illegal content')
+            throw new Error('Server response with unexpected content')
           }
         }
       } catch (err) {
         // TODO: useError
         console.error(err)
-        setError(err)
+        setError(err.message)
       } finally {
         setLoading(false)
       }

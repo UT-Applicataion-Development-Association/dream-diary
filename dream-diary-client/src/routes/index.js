@@ -7,6 +7,7 @@ import ViewDreamPage from 'pages/ViewDreamPage'
 import CreateDreamPage from 'pages/CreateDreamPage'
 import LoginPage from 'pages/LoginPage'
 import SignupPage from 'pages/SignupPage'
+import RequireAuthentication from 'components/RequireAuthentication'
 
 const RenderRoutes = () => {
   return (
@@ -16,7 +17,15 @@ const RenderRoutes = () => {
 
       <Route exact path="/dream/:id" element={<ViewDreamPage />} />
 
-      <Route exact path="/new-dream" element={<CreateDreamPage />} />
+      <Route
+        exact
+        path="/new-dream"
+        element={
+          <RequireAuthentication>
+            <CreateDreamPage />
+          </RequireAuthentication>
+        }
+      />
 
       <Route exact path="/login" element={<LoginPage />} />
 

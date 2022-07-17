@@ -5,8 +5,10 @@ import LoginForm from 'components/LoginForm'
 import UserContext from 'stores/UserContext'
 
 import './login-page.scss'
+import useDocumentTitle from 'hooks/useDocumentTitle'
 
 const LoginPage = () => {
+  useDocumentTitle('Login')
   const userCtx = useContext(UserContext)
 
   // Clear current user

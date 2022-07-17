@@ -24,8 +24,13 @@ module.exports = {
         return users
     },
 
-    retrieveByEmail: async (email) => {
-        const user = await User.findOne({ email }).exec()
+    retrieveByEmail: async (email, includePassword = false) => {
+        let userQuery = User.findOne({ email })
+        if (includePassword) {
+            userQuery = userQuery.select("+password")
+        }
+
+        const user = await userQuery.exec()
         return user
     },
 
