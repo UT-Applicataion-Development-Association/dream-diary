@@ -2,41 +2,24 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useFetch from 'hooks/useFetch'
 import UserContext from 'stores/UserContext'
-import { randomToken } from 'utils/random'
 import './LoginForm.scss'
-
-// const loginUser = async (email, password) => {
-//   // TODO: submit to backend
-//   const _id = randomToken()
-//   const username = 'Test User'
-//   const token = randomToken()
-
-//   if (email !== 'test@test.com') {
-//     return null
-//   }
-
-//   return { user: { _id, email, username }, token }
-// }
 
 const LoginForm = () => {
   const navigate = useNavigate()
+  const userCtx = useContext(UserContext)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  useEffect(() => {
-    const auth = localStorage.getItem('user')
-    if (auth) {
-      navigate('/')
-    }
-  }, [])
 
   const { error, loading, data, callFetch } = useFetch(
     {
       route: '/auth/login',
       method: 'post',
     },
-    () => navigate('/')
+    (data) => {
+      userCtx.dispatch({ type: 'SET', state: data })
+      navigate('/')
+    }
   )
 
   const handleSubmit = async (e) => {
@@ -68,7 +51,7 @@ const LoginForm = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       {error && <div className="error error-message">{error}</div>}
-      <button type="submit" className="submit-btn">
+      <button type="submit" className="submit-btn" disabled={loading}>
         登录
       </button>
     </form>
