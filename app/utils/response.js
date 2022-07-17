@@ -105,6 +105,10 @@ const error2Response = {
         status: StatusCodes.NOT_FOUND,
         msg: ReasonPhrases.UNAUTHORIZED,
     },
+    InvalidIdException: {
+        status: StatusCodes.BAD_REQUEST,
+        msg: 'Invalid ID',
+    },
 }
 
 module.exports = {

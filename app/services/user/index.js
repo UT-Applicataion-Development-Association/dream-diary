@@ -23,7 +23,7 @@ class UserServices {
         return user
     }
 
-    async getUsers(filter) {
+    async getAllUsers(filter) {
         const users = await userDao.find(filter)
         return users
     }
@@ -35,6 +35,11 @@ class UserServices {
 
     async getUserByEmail(email) {
         const user = await userDao.retrieveByEmail(email)
+        return user
+    }
+
+    async getUserByEmailWithPassword(email) {
+        const user = await userDao.retrieveByEmail(email, true)
         return user
     }
 

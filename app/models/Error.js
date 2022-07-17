@@ -27,6 +27,7 @@ class RequirementUnfulfilledException extends ServerException {}
 class UniquenessViolatedException extends ServerException {}
 class InvalidValueException extends ServerException {}
 class ResourceNotFoundException extends ServerException {}
+class InvalidIdException extends ServerException {}
 
 module.exports = {
     ServerError,
@@ -42,4 +43,5 @@ module.exports = {
     UniquenessViolatedException,
     InvalidValueException,
     ResourceNotFoundException,
+    InvalidIdException,
 }

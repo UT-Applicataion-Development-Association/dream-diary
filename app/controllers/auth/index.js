@@ -1,21 +1,27 @@
 const mongoose = require('mongoose')
+const {
+    UniquenessViolatedException,
+    RequirementUnfulfilledException,
+    InvalidValueException,
+    ResourceNotFoundException,
+    InvalidIdException,
+} = require('../../models/Error')
 
 const UserServices = require('../../services/user')
 const { Response, response } = require('../../utils/response')
 
 class UserController {
-    registerUser = async (req, res) => {
+    registerUser = async (req, res, next) => {
         const { name, password, email } = req.body
 
-        if (!(name && password && email)) {
-            res.status(400).send(response.NOT_SATISFIED)
-            return
-        }
-
-        // TODO: Add validation for email&password format
-        const userServices = new UserServices()
-
         try {
+            if (!(name && password && email)) {
+                throw new RequirementUnfulfilledException()
+            }
+
+            // TODO: Add validation for email&password format
+            const userServices = new UserServices()
+
             const user = await userServices.createUser({
                 name,
                 password,
@@ -32,29 +38,21 @@ class UserController {
             // If MongoError
             // If unique email is violated
             if (err.message === 'User already exists') {
-                res.status(400).send(
-                    new Response({ msg: err.message, status: 400 })
-                )
+                next(new UniquenessViolatedException('User already exists'))
             } else if (err instanceof mongoose.Error.ValidationError) {
-                res.status(400).send(
-                    new Response({ msg: 'Invalid inputs', status: 400 })
-                )
+                next(new InvalidValueException('Invalid inputs'))
             } else {
-                // Else
-                console.error(err)
-                res.status(500).send(
-                    new Response({ msg: err.message, status: 500 })
-                )
+                next(err)
             }
         }
     }
 
-    authenticateUser = async (req, res) => {
+    authenticateUser = async (req, res, next) => {
         try {
             const { email, password } = req.body
             const userServices = new UserServices()
 
-            const user = await userServices.getUserByEmail(email)
+            const user = await userServices.getUserByEmailWithPassword(email)
             if (user && (await user.matchPassword(password))) {
                 res.send(
                     new Response({
@@ -70,17 +68,14 @@ class UserController {
                 )
             } else {
                 // User not found or password doesn't match
-                res.status(404).send(response.NOT_FOUND)
+                throw new ResourceNotFoundException('Invalid credentials')
             }
         } catch (err) {
-            console.error(err)
-            res.status(500).send(
-                new Response({ msg: err.message, status: 500 })
-            )
+            next(err)
         }
     }
 
-    updateUser = async (req, res) => {
+    updateUser = async (req, res, next) => {
         try {
             const userServices = new UserServices()
             const email = req.email
@@ -89,10 +84,7 @@ class UserController {
             const updateBody = { _id, name }
 
             if (!mongoose.isValidObjectId(_id)) {
-                res.status(400).send(
-                    new Response({ status: 400, msg: 'Invalid _id' })
-                )
-                return
+                throw new InvalidIdException()
             }
 
             const updatedUser = await userServices.updateUser(_id, updateBody)
@@ -105,25 +97,18 @@ class UserController {
                     })
                 )
             } else {
-                res.status(404).send(response.NOT_FOUND)
+                throw new ResourceNotFoundException()
             }
         } catch (err) {
-            console.error(err)
-            // TODO:
-            // If MongoError
-            // If user not found
-            // Else
-            res.status(500).send(
-                new Response({ msg: err.message, status: 500 })
-            )
+            next(err)
         }
     }
 
-    getUser = async (req, res) => {
+    getUser = async (req, res, next) => {
         // TODO:
     }
 
-    deleteUser = async (req, res) => {
+    deleteUser = async (req, res, next) => {
         // TODO:
     }
 }

@@ -12,18 +12,18 @@ MessageContext.displayName = 'MessageContext'
 /**
  *
  * @param {any} state Previous state
- * @param {any} action { type, state }
- *   @example PUSH: state = { id, content, level, duration }
- *   @example POP: state = { id }
+ * @param {any} action { type, payload }
+ *   @example PUSH: payload = { id, content, level, duration }
+ *   @example POP: payload = { id }
  * @returns {object} newState
  */
 const messageReducer = (state, action) => {
   switch (action.type && action.type.toUpperCase()) {
     case 'PUSH':
-      return { messages: state.messages.concat(action.state) }
+      return { messages: state.messages.concat(action.payload) }
     case 'POP':
       const messages = state.messages.filter(
-        (msg) => msg.id !== action.state.id
+        (msg) => msg.id !== action.payload.id
       )
       return { messages }
     default:

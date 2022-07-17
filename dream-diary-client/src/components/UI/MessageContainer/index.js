@@ -13,7 +13,7 @@ const MessageContainer = ({ className = '' }) => {
 
   const popMessage = () => (id) => {
     setTimeout(() => {
-      msgCtx.dispatch({ type: 'POP', state: { id } })
+      msgCtx.dispatch({ type: 'POP', payload: { id } })
     }, 1000)
   }
 
