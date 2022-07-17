@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useContext } from 'react'
 import UserContext from 'stores/UserContext'
+import useMessage from './useMessage'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://127.0.0.1:5000/api'
 
@@ -8,6 +9,8 @@ const useFetch = ({ route, method = 'get', initialData = null }, callback) => {
   const [loading, setLoading] = useState(false)
 
   const [data, setData] = useState(initialData)
+
+  const message = useMessage()
 
   // Get authentication token
   const userCtx = useContext(UserContext)
@@ -43,15 +46,20 @@ const useFetch = ({ route, method = 'get', initialData = null }, callback) => {
         } else {
           try {
             const responseJson = await response.json()
-            setError(responseJson.msg)
+            const errorMsg = responseJson.msg
+            console.error(
+              `${responseJson.entity.error.name}: ${responseJson.msg}`
+            )
+            setError(errorMsg)
+            message.error(errorMsg)
           } catch (err) {
             throw new Error('Server response with unexpected content')
           }
         }
       } catch (err) {
-        // TODO: useError
         console.error(err)
         setError(err.message)
+        message.error(err.message)
       } finally {
         setLoading(false)
       }

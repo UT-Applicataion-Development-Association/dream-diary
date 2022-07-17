@@ -20,7 +20,7 @@ const LoginForm = () => {
       method: 'post',
     },
     (data) => {
-      userCtx.dispatch({ type: 'SET', state: data })
+      userCtx.dispatch({ type: 'SET', payload: data })
       navigate('/')
     }
   )
@@ -53,7 +53,6 @@ const LoginForm = () => {
         className="login-form-input"
         onChange={(e) => setPassword(e.target.value)}
       />
-      {error && <div className="error error-message">{error}</div>}
       <button type="submit" className="submit-btn" disabled={loading}>
         登录
       </button>
