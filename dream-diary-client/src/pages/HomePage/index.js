@@ -46,15 +46,15 @@ const HomePage = () => {
 
   return (
     <div className="page home-page">
-      <NavBar title={'梦境墙'} />
-      <main className="home-main">
+      <NavBar title="梦境日记" search />
+      <main className="home-main page-main">
         {dreamLists.map((dreamList, i) => (
           <DreamFeed key={i} dreams={dreamList} />
         ))}
 
         <DreamFeed dreams={mockDreams} />
       </main>
-      <Footer addButton />
+      {/* <Footer addButton /> */}
     </div>
   )
 }

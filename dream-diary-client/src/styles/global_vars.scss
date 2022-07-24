@@ -1,12 +1,14 @@
-$dark: #313131;
+$dark: var(--black-color);
 $dark-gray: #3a3a3a;
 $light-gray: #8a8a8a;
-$bg-color: #4a4e69;
+$text-color: var(--primary-color);
 $bg-dark: #363a52;
 $light: #f3f3f3;
 $error: #d34059;
 $success: #3de295;
 $warning: #ff7d04;
+
+$white: var(--white-color);
 
 $serif: Georgia, 'Times New Roman', Times, serif;
 $sans-serif: Verdana, sans-serif;
@@ -49,7 +51,7 @@ $footer-height: 100px;
 @mixin button(
   $px: 2rem,
   $py: 0.5rem,
-  $bg: $bg-color,
+  $bg: $text-color,
   $color: white,
   $bg-hover: $bg-dark,
   $font-size: large,
@@ -82,14 +84,7 @@ $footer-height: 100px;
 }
 
 @mixin gradient-bg() {
-  background-color: $light;
-  background: linear-gradient(
-    to bottom left,
-    #c7cfff,
-    #ffe7e7,
-    #fff2de,
-    #c7cfff
-  );
+  background-color: $white;
 }
 
 .button {

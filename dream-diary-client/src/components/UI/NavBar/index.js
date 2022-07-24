@@ -1,21 +1,23 @@
 import React, { useContext, useCallback, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import backButton from 'assets/ui/back_button.svg'
-import Toggle from 'assets/ui/toggle_menu.svg'
+import BackIcon from 'assets/ui/back_button.svg'
+import MenuIcon from 'assets/ui/toggle_menu.svg'
+import SearchIcon from 'assets/ui/search.svg'
 
 import Drawer from 'components/UI/Drawer'
 
 import UserContext from 'stores/UserContext'
 
-import './navbar.scss'
+import './NavBar.scss'
+import DrawerMenu from 'components/DrawerMenu'
 
 const BackButton = () => {
   const navigate = useNavigate()
 
   return (
     <img
-      src={backButton}
+      src={BackIcon}
       alt="back-button"
       className="nav-left back-button"
       onClick={() => navigate(-1)}
@@ -23,37 +25,34 @@ const BackButton = () => {
   )
 }
 
-const NavBar = ({ title, back }) => {
-  const userCtx = useContext(UserContext)
-
+const NavBar = ({ title, back, search, cancel }) => {
   const [showDrawer, setShowDrawer] = useState(false)
-
-  const toggleShowDrawer = useCallback((show) => {
-    setShowDrawer(show)
-  }, [])
 
   return (
     <div className="nav">
+      <img
+        src={MenuIcon}
+        alt="toggle-menu"
+        className="toggle-menu nav-icon"
+        onClick={() => setShowDrawer(true)}
+      />
+
+      {showDrawer && (
+        <Drawer side="left" toggleHide={() => setShowDrawer(false)}>
+          <DrawerMenu closeDrawer={() => setShowDrawer(false)} />
+        </Drawer>
+      )}
+
       {back && <BackButton />}
-      <h1 className="nav-text nav-left">{title}</h1>
-      {userCtx.state.token ? (
-        <>
-          <img
-            src={Toggle}
-            alt="toggle-menu"
-            className="toggle-menu nav-right"
-            onClick={() => toggleShowDrawer(true)}
-          />
-          {showDrawer && (
-            <Drawer side="right" toggleHide={() => toggleShowDrawer(false)}>
-              Drawer
-            </Drawer>
-          )}
-        </>
-      ) : (
-        <Link className="nav-right" to="/login">
-          <button className="button">登录</button>
-        </Link>
+
+      <h1 className="nav-text">{title}</h1>
+
+      {search && (
+        <img
+          src={SearchIcon}
+          alt="search-button"
+          className="toggle-search nav-icon"
+        />
       )}
     </div>
   )

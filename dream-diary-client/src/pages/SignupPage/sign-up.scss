@@ -2,16 +2,17 @@
 
 .signup-page {
   @include flex-display;
+  background-color: var(--secondary-color);
 
   .signup-page-title {
-    color: $bg-color;
+    color: $text-color;
     margin-bottom: 1.5em;
     font-size: 2.5rem;
   }
 
   .link-to-login {
     margin-top: 20px;
-    color: $bg-color;
+    color: $text-color;
     opacity: 0.75;
   }
 }
