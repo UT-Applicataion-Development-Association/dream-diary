@@ -37,7 +37,9 @@ const ViewDreamPage = (props) => {
   return (
     <div className="page view-dream-page">
       <NavBar title={data?.title || ''} back />
-      <DreamBody params={params} dream={data || mockDream} />
+      <main>
+        <DreamBody params={params} dream={data || mockDream} />
+      </main>
     </div>
   )
 }

@@ -2,11 +2,6 @@
 
 .home-page {
   .home-main {
-    width: 100%;
-    height: calc(100vh - #{$navbar-height} - #{$footer-height});
-    @include flex-display($jc: 'flex-start');
-    overflow-y: scroll;
-
     .dream-feed {
       display: grid;
       column-count: 2;

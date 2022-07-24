@@ -2,17 +2,18 @@
 
 .login-page {
   @include flex-display;
+  background-color: var(--secondary-color);
 
   .login-page-title {
     font-family: $sans-serif;
-    color: #464660;
+    color: var(--primary-color);
     margin-bottom: 1.5em;
     font-size: 2.5rem;
   }
 
   .link-to-signup {
     margin-top: 20px;
-    color: #464660;
+    color: var(--primary-color);
     opacity: 0.75;
   }
 }
