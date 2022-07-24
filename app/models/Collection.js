@@ -4,21 +4,26 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 /**
+ * User - id of the User
  * Title - name of the collection
- * Save - Lists of dreams
+ * dreams - Lists of dreams
  * CreatedAt
  * UpdatedAt
  */
-const SaveSchema = new Schema({
+const CollectionSchema = new Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
     title: {
         type: String,
         required: true
     },
-    ofDream: {
+    dreams: {
         type: [mongoose.Schema.Types.ObjectId], // Store all Dream ObjectIDs in here.
     }
 }, { timestamps: true});
 
-const Saves = mongoose.model('Saves', SaveSchema);
+const Collection = mongoose.model('Collection', CollectionSchema);
 
-module.exports = Saves;
+module.exports = Collection;
